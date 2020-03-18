@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,7 +11,7 @@
         <!--Menu View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MenuViewController" customModule="Spacy_Food" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuViewController" id="BYZ-38-t0r" customClass="MenuViewController" customModule="Spacy_Food" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,9 +150,99 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="101.78571428571428"/>
         </scene>
+        <!--Menu Item Details View Controller-->
+        <scene sceneID="NiU-7O-RYj">
+            <objects>
+                <viewController storyboardIdentifier="MenuItemDetailsViewController" id="yMy-fo-onV" customClass="MenuItemDetailsViewController" customModule="Spacy_Food" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3JV-Ag-NT6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="0kt-Tz-vQ6">
+                                <rect key="frame" x="-100" y="-56" width="614" height="1018"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_item_img1" translatesAutoresizingMaskIntoConstraints="NO" id="5KK-VB-0gh">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="509.00000000000011"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRN-Q0-Rdc">
+                                <rect key="frame" x="30" y="823" width="354" height="56"/>
+                                <color key="backgroundColor" red="0.38164311649999999" green="0.49087244270000002" blue="0.93729978800000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="Ec1-0k-Kqy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <state key="normal" title="Add to cart">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addToCardtAction:" destination="yMy-fo-onV" eventType="touchUpInside" id="BHD-js-sVh"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3n9-WR-DHQ">
+                                <rect key="frame" x="30" y="533" width="354" height="266"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOM-AZ-MKG">
+                                        <rect key="frame" x="63.5" y="0.0" width="227" height="84"/>
+                                        <string key="text">Alien noodles 
+(550g)</string>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buttery, garlicky noodles served with juicy jumbo shrimp" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aTi-Rx-WXH">
+                                        <rect key="frame" x="34.5" y="113" width="285.5" height="35"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$7.90" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcG-1G-qfY">
+                                        <rect key="frame" x="132" y="177.5" width="90.5" height="43"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="36"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivery in 25-35 mins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUq-5Z-QZX">
+                                        <rect key="frame" x="107.5" y="249.5" width="139" height="16.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="0kt-Tz-vQ6" firstAttribute="top" secondItem="QAz-up-gqv" secondAttribute="top" constant="-100" id="1Jw-nR-phs"/>
+                            <constraint firstItem="QAz-up-gqv" firstAttribute="bottom" secondItem="0kt-Tz-vQ6" secondAttribute="bottom" constant="-100" id="2Ti-7Y-ZRP"/>
+                            <constraint firstItem="5KK-VB-0gh" firstAttribute="height" secondItem="0kt-Tz-vQ6" secondAttribute="height" multiplier="1:2" id="47v-P6-Uh3"/>
+                            <constraint firstItem="5KK-VB-0gh" firstAttribute="leading" secondItem="QAz-up-gqv" secondAttribute="leading" id="4vv-7d-K5M"/>
+                            <constraint firstAttribute="trailing" secondItem="lRN-Q0-Rdc" secondAttribute="trailing" constant="30" id="BYj-d5-05I"/>
+                            <constraint firstItem="lRN-Q0-Rdc" firstAttribute="top" secondItem="3n9-WR-DHQ" secondAttribute="bottom" constant="24" id="HTr-tF-eEv"/>
+                            <constraint firstItem="QAz-up-gqv" firstAttribute="trailing" secondItem="3n9-WR-DHQ" secondAttribute="trailing" constant="30" id="NoW-pl-8Nv"/>
+                            <constraint firstAttribute="bottom" secondItem="lRN-Q0-Rdc" secondAttribute="bottom" constant="17" id="b2C-8U-EDE"/>
+                            <constraint firstItem="3n9-WR-DHQ" firstAttribute="top" secondItem="5KK-VB-0gh" secondAttribute="bottom" constant="24" id="hIj-rc-Xqm"/>
+                            <constraint firstItem="QAz-up-gqv" firstAttribute="trailing" secondItem="5KK-VB-0gh" secondAttribute="trailing" id="jye-Zs-eqX"/>
+                            <constraint firstItem="lRN-Q0-Rdc" firstAttribute="leading" secondItem="3JV-Ag-NT6" secondAttribute="leading" constant="30" id="n0d-A6-K9e"/>
+                            <constraint firstItem="3n9-WR-DHQ" firstAttribute="leading" secondItem="QAz-up-gqv" secondAttribute="leading" constant="30" id="oIM-03-kEP"/>
+                            <constraint firstItem="0kt-Tz-vQ6" firstAttribute="leading" secondItem="QAz-up-gqv" secondAttribute="leading" constant="-100" id="qb0-6E-IH9"/>
+                            <constraint firstItem="5KK-VB-0gh" firstAttribute="top" secondItem="3JV-Ag-NT6" secondAttribute="top" id="vUK-fg-kFQ"/>
+                            <constraint firstItem="QAz-up-gqv" firstAttribute="trailing" secondItem="0kt-Tz-vQ6" secondAttribute="trailing" constant="-100" id="zit-mY-vPd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QAz-up-gqv"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uz1-A1-fNz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1033" y="102"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="background" width="375" height="812"/>
+        <image name="background" width="1125" height="2436"/>
         <image name="menu_item_img1" width="375" height="417"/>
     </resources>
 </document>

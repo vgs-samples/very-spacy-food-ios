@@ -14,6 +14,7 @@
 		3213004024193DB70062FEF0 /* Spacy_FoodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3213003F24193DB70062FEF0 /* Spacy_FoodTests.swift */; };
 		3213004D241B952E0062FEF0 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3213004C241B952E0062FEF0 /* MenuViewController.swift */; };
 		3213004F241BA1610062FEF0 /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3213004E241BA1610062FEF0 /* MenuItemCell.swift */; };
+		32AAAC4A24212C4200A68317 /* MenuItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AAAC4924212C4200A68317 /* MenuItemDetailsViewController.swift */; };
 		AC9DBF8395D777CD43F2EFB8 /* Pods_Spacy_Food.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57C9A3ACC25095BFB0F12836 /* Pods_Spacy_Food.framework */; };
 		EA0199437B39D2BF3ED02AB9 /* Pods_Spacy_FoodTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F0ADFA53C0989C5851C07C /* Pods_Spacy_FoodTests.framework */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		3213004124193DB70062FEF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3213004C241B952E0062FEF0 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		3213004E241BA1610062FEF0 /* MenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
+		32AAAC4924212C4200A68317 /* MenuItemDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemDetailsViewController.swift; sourceTree = "<group>"; };
 		3D4F9079FDCEB1FBDBF3B157 /* Pods-Spacy Food.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spacy Food.debug.xcconfig"; path = "Target Support Files/Pods-Spacy Food/Pods-Spacy Food.debug.xcconfig"; sourceTree = "<group>"; };
 		57C9A3ACC25095BFB0F12836 /* Pods_Spacy_Food.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spacy_Food.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64B936188138F302A82131BF /* Pods-Spacy FoodTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spacy FoodTests.debug.xcconfig"; path = "Target Support Files/Pods-Spacy FoodTests/Pods-Spacy FoodTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			children = (
 				3213002824193DB50062FEF0 /* AppDelegate.swift */,
 				3213004C241B952E0062FEF0 /* MenuViewController.swift */,
+				32AAAC4924212C4200A68317 /* MenuItemDetailsViewController.swift */,
 				3213004E241BA1610062FEF0 /* MenuItemCell.swift */,
 				3213002E24193DB50062FEF0 /* Main.storyboard */,
 				3213003124193DB70062FEF0 /* Assets.xcassets */,
@@ -142,7 +145,7 @@
 				3213002124193DB50062FEF0 /* Sources */,
 				3213002224193DB50062FEF0 /* Frameworks */,
 				3213002324193DB50062FEF0 /* Resources */,
-				0E25D534FCFD94B760089034 /* [CP] Embed Pods Frameworks */,
+				D66B3A63B06ED21EB05B1F69 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -231,23 +234,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0E25D534FCFD94B760089034 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Spacy Food/Pods-Spacy Food-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Spacy Food/Pods-Spacy Food-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Spacy Food/Pods-Spacy Food-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2A4C125BFFF7582CB6D97FDD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -268,6 +254,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D66B3A63B06ED21EB05B1F69 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Spacy Food/Pods-Spacy Food-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Spacy Food/Pods-Spacy Food-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Spacy Food/Pods-Spacy Food-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E5A9B447FD381B9C81BCACE0 /* [CP] Check Pods Manifest.lock */ = {
@@ -302,6 +305,7 @@
 				3213004F241BA1610062FEF0 /* MenuItemCell.swift in Sources */,
 				3213002924193DB50062FEF0 /* AppDelegate.swift in Sources */,
 				3213004D241B952E0062FEF0 /* MenuViewController.swift in Sources */,
+				32AAAC4A24212C4200A68317 /* MenuItemDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

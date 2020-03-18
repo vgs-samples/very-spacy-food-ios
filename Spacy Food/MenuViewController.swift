@@ -66,6 +66,12 @@ extension MenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let detailsVC : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "MenuItemDetailsViewController") as UIViewController
+        self.present(detailsVC, animated: true, completion: nil)
+    }
 }
 
 
