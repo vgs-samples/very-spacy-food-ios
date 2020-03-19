@@ -11,7 +11,12 @@ import UIKit
 
 class MenuItemCell: UITableViewCell {
     
+    var onAddItemClicked: (()-> Void)?
+    
     override func awakeFromNib() {
         
+    }
+    @IBAction func addItemAction(_ sender: Any) {
+        self.onAddItemClicked?()
     }
 }

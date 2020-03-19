@@ -9,12 +9,25 @@
 import Foundation
 import UIKit
 
+struct MenuItem {
+    let imgName: String
+    let name: String
+    let ingredients: String
+    let weight: String
+    let price: Double
+}
+
 class MenuItemDetailsViewController: UIViewController {
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
+    
     @IBAction func addToCardtAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }

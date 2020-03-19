@@ -13,8 +13,21 @@ class MenuViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var checkoutButton: UIButton!
+    @IBOutlet weak var counterLabel: UILabel!
     
+    var orderItemsCount: Int = 0 {
+        didSet {
+            counterLabel.text = "\(orderItemsCount)"
+        }
+    }
     
+    var securedCardData: SecuredCardData? {
+        didSet {
+            let title = securedCardData == nil ? "Add payment method" : "Checkout"
+            checkoutButton.setTitle(title, for: .normal)
+        }
+    }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -27,6 +40,8 @@ class MenuViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
         tableView.reloadData()
+        
+        self.navigationController?.navigationBar.tintColor = .white
     }
     
     func setupBackgroundView() {
@@ -45,17 +60,37 @@ class MenuViewController: UIViewController {
         backgroundImageView.addMotionEffect(group)
     }
     
-    @IBAction func addPaymentMethodAction(_ sender: UIButton) {
+    
+    
+    @IBAction func checkoutAction(_ sender: UIButton) {
+//        if let securedCardData = securedCardData {
+            proceedToCheckout()
+//        } else {
+//            showCollectCardDataView()
+//        }
+    }
+    
+    private func showCollectCardDataView() {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let collectCardVC : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "CollectCreditCardDataViewController") as! CollectCreditCardDataViewController
         self.present(collectCardVC, animated: true, completion: nil)
     }
+    
+    private func proceedToCheckout() {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let collectCardVC : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "CheckoutViewController") as! CheckoutViewController
+        self.navigationController?.pushViewController(collectCardVC, animated: true)
+    }
+
 }
 
 extension MenuViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuItemCell", for: indexPath)
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuItemCell", for: indexPath) as? MenuItemCell
+        cell?.onAddItemClicked = { [weak self] in
+            self?.orderItemsCount += 1
+        }
+        return cell ?? UITableViewCell()
     }
 }
 

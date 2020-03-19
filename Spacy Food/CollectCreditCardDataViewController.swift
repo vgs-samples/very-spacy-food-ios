@@ -10,6 +10,14 @@ import Foundation
 import UIKit
 import VGSCollectSDK
 
+
+struct SecuredCardData {
+    let cardNumberAlias: String
+    let cvcAlias: String
+    let expDataAlias: String
+    var cardNumberLast4: String = ""
+}
+
 class CollectCreditCardDataViewController: UIViewController {
 
     @IBOutlet weak var cardDataStackView: UIStackView!
@@ -119,6 +127,7 @@ class CollectCreditCardDataViewController: UIViewController {
             } else {
                 if let error = error as? NSError {
                     print(error.description)
+                    self?.dismiss(animated: true, completion: nil)
                 }
             }
         }
