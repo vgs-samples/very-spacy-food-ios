@@ -8,6 +8,7 @@ target 'Spacy Food' do
   # Pods for Spacy Food
 
  pod 'VGSCollectSDK'
+ pod 'VGSCollectSDK/CardIO'
 
   target 'Spacy FoodTests' do
     inherit! :search_paths

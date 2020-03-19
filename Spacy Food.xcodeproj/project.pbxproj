@@ -14,6 +14,7 @@
 		3213004024193DB70062FEF0 /* Spacy_FoodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3213003F24193DB70062FEF0 /* Spacy_FoodTests.swift */; };
 		3213004D241B952E0062FEF0 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3213004C241B952E0062FEF0 /* MenuViewController.swift */; };
 		3213004F241BA1610062FEF0 /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3213004E241BA1610062FEF0 /* MenuItemCell.swift */; };
+		327F8E8924227A0200112868 /* CollectCreditCardDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327F8E8824227A0200112868 /* CollectCreditCardDataViewController.swift */; };
 		32AAAC4A24212C4200A68317 /* MenuItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AAAC4924212C4200A68317 /* MenuItemDetailsViewController.swift */; };
 		AC9DBF8395D777CD43F2EFB8 /* Pods_Spacy_Food.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57C9A3ACC25095BFB0F12836 /* Pods_Spacy_Food.framework */; };
 		EA0199437B39D2BF3ED02AB9 /* Pods_Spacy_FoodTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F0ADFA53C0989C5851C07C /* Pods_Spacy_FoodTests.framework */; };
@@ -41,6 +42,7 @@
 		3213004124193DB70062FEF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3213004C241B952E0062FEF0 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		3213004E241BA1610062FEF0 /* MenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
+		327F8E8824227A0200112868 /* CollectCreditCardDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectCreditCardDataViewController.swift; sourceTree = "<group>"; };
 		32AAAC4924212C4200A68317 /* MenuItemDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemDetailsViewController.swift; sourceTree = "<group>"; };
 		3D4F9079FDCEB1FBDBF3B157 /* Pods-Spacy Food.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spacy Food.debug.xcconfig"; path = "Target Support Files/Pods-Spacy Food/Pods-Spacy Food.debug.xcconfig"; sourceTree = "<group>"; };
 		57C9A3ACC25095BFB0F12836 /* Pods_Spacy_Food.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spacy_Food.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +98,7 @@
 				3213002824193DB50062FEF0 /* AppDelegate.swift */,
 				3213004C241B952E0062FEF0 /* MenuViewController.swift */,
 				32AAAC4924212C4200A68317 /* MenuItemDetailsViewController.swift */,
+				327F8E8824227A0200112868 /* CollectCreditCardDataViewController.swift */,
 				3213004E241BA1610062FEF0 /* MenuItemCell.swift */,
 				3213002E24193DB50062FEF0 /* Main.storyboard */,
 				3213003124193DB70062FEF0 /* Assets.xcassets */,
@@ -304,6 +307,7 @@
 			files = (
 				3213004F241BA1610062FEF0 /* MenuItemCell.swift in Sources */,
 				3213002924193DB50062FEF0 /* AppDelegate.swift in Sources */,
+				327F8E8924227A0200112868 /* CollectCreditCardDataViewController.swift in Sources */,
 				3213004D241B952E0062FEF0 /* MenuViewController.swift in Sources */,
 				32AAAC4A24212C4200A68317 /* MenuItemDetailsViewController.swift in Sources */,
 			);

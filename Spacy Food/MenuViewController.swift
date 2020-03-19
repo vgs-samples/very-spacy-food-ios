@@ -46,7 +46,9 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction func addPaymentMethodAction(_ sender: UIButton) {
-        
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let collectCardVC : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "CollectCreditCardDataViewController") as! CollectCreditCardDataViewController
+        self.present(collectCardVC, animated: true, completion: nil)
     }
 }
 
@@ -69,7 +71,7 @@ extension MenuViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let detailsVC : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "MenuItemDetailsViewController") as UIViewController
+        let detailsVC : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "MenuItemDetailsViewController") as! MenuItemDetailsViewController
         self.present(detailsVC, animated: true, completion: nil)
     }
 }
