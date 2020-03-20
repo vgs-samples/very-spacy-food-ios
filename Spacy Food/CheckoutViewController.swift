@@ -11,14 +11,23 @@ import UIKit
 
 class CheckoutViewController: UIViewController {
     
+    var orderItems = [Any]()
+    var securedCardData: SecuredCardData!
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+         return .lightContent
+     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationItem.rightBarButtonItem?.title = "Back"
     }
-    
+
     @IBAction func payAction(_ sender: Any) {
         
+    }
+    
+    @IBAction func backAction(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
 }

@@ -19,6 +19,9 @@ struct MenuItem {
 
 class MenuItemDetailsViewController: UIViewController {
 
+    var menuItem: MenuItem?
+    var onItemAdded: ((MenuItem?) -> Void)?
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -29,6 +32,11 @@ class MenuItemDetailsViewController: UIViewController {
     }
     
     @IBAction func addToCardtAction(_ sender: Any) {
+        onItemAdded?(menuItem)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func closeAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
 }

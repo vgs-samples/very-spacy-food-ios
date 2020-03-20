@@ -16,6 +16,7 @@ struct SecuredCardData {
     let cvcAlias: String
     let expDataAlias: String
     var cardNumberLast4: String = ""
+    var cardBrand: String = ""
 }
 
 class CollectCreditCardDataViewController: UIViewController {
@@ -23,7 +24,7 @@ class CollectCreditCardDataViewController: UIViewController {
     @IBOutlet weak var cardDataStackView: UIStackView!
     
     // Init VGS Collector
-    var collector = VGSCollect(id: "vaultID", environment: .sandbox)
+    var collector = VGSCollect(id: "tntdw5wjxet", environment: .sandbox)
     
     var scanController: VGSCardIOScanController?
     
@@ -34,6 +35,8 @@ class CollectCreditCardDataViewController: UIViewController {
     
     // Native UI Elements
     var cardHolderName = UITextField()
+    
+    var onCompletion: ((SecuredCardData) -> Void )?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,7 +108,7 @@ class CollectCreditCardDataViewController: UIViewController {
         cardHolderName.font = textFont
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: cardHolderName.frame.height))
         let actionButton = UIButton(frame: CGRect(x: cardHolderName.bounds.origin.x + 10, y: 0, width: 8, height: cardHolderName.frame.height))
-        actionButton.backgroundColor = .red
+        actionButton.imageView?.image = UIImage(named: "scan_icon")
         actionButton.addTarget(self, action: #selector(scan), for: .touchUpInside)
         cardHolderName.leftView = paddingView
         cardHolderName.leftViewMode = .always
@@ -120,14 +123,23 @@ class CollectCreditCardDataViewController: UIViewController {
     }
     
     @IBAction func save(_ sender: Any) {
-        collector.submit(path: "/post") { [weak self](data, error) in
-            if let data = data {
-                print(data)
+        let cardState = cardNumber.state as? CardState
+        let last4 = cardState?.last4 ?? ""
+        let brand = cardState?.cardBrand.stringValue() ?? ""
+        
+        collector.submit(path: "/post") { [weak self](json, error) in
+            if let data = json?["json"] as? [String: Any],
+                let cardNumberAlias = data["card_number"] as? String,
+                let cvcAlias = data["card_cvc"]  as? String,
+                let expDataAlias = data["card_expirationDate"]  as? String  {
+                let cardData = SecuredCardData.init(cardNumberAlias: cardNumberAlias, cvcAlias: cvcAlias, expDataAlias: expDataAlias, cardNumberLast4: last4, cardBrand: brand)
+                self?.onCompletion?(cardData)
                 self?.dismiss(animated: true, completion: nil)
             } else {
                 if let error = error as? NSError {
                     print(error.description)
-                    self?.dismiss(animated: true, completion: nil)
+                } else {
+                    // data not full
                 }
             }
         }

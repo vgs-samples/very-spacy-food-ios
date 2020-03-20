@@ -28,6 +28,7 @@ class MenuViewController: UIViewController {
             checkoutButton.setTitle(title, for: .normal)
         }
     }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -63,25 +64,29 @@ class MenuViewController: UIViewController {
     
     
     @IBAction func checkoutAction(_ sender: UIButton) {
-//        if let securedCardData = securedCardData {
-            proceedToCheckout()
-//        } else {
-//            showCollectCardDataView()
-//        }
+        if let securedCardData = securedCardData {
+            proceedToCheckout([Any](), cardData: securedCardData)
+        } else {
+            showCollectCardDataView()
+        }
     }
     
     private func showCollectCardDataView() {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let collectCardVC : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "CollectCreditCardDataViewController") as! CollectCreditCardDataViewController
+        let collectCardVC = mainStoryboard.instantiateViewController(withIdentifier: "CollectCreditCardDataViewController") as! CollectCreditCardDataViewController
+        collectCardVC.onCompletion = { [weak self] (cardData) in
+            self?.securedCardData = cardData
+        }
         self.present(collectCardVC, animated: true, completion: nil)
     }
     
-    private func proceedToCheckout() {
+    private func proceedToCheckout(_ orderItems: [Any], cardData: SecuredCardData) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let collectCardVC : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "CheckoutViewController") as! CheckoutViewController
-        self.navigationController?.pushViewController(collectCardVC, animated: true)
+        let checkoutVC = mainStoryboard.instantiateViewController(withIdentifier: "CheckoutViewController") as! CheckoutViewController
+        checkoutVC.orderItems = orderItems
+        checkoutVC.securedCardData = cardData
+        self.navigationController?.pushViewController(checkoutVC, animated: true)
     }
-
 }
 
 extension MenuViewController: UITableViewDataSource {
@@ -106,7 +111,10 @@ extension MenuViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let detailsVC : UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "MenuItemDetailsViewController") as! MenuItemDetailsViewController
+        let detailsVC = mainStoryboard.instantiateViewController(withIdentifier: "MenuItemDetailsViewController") as! MenuItemDetailsViewController
+        detailsVC.onItemAdded = { [weak self] item in
+            self?.orderItemsCount += 1
+        }
         self.present(detailsVC, animated: true, completion: nil)
     }
 }
