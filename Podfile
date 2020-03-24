@@ -7,8 +7,8 @@ target 'Spacy Food' do
 
   # Pods for Spacy Food
 
- pod 'VGSCollectSDK'
- pod 'VGSCollectSDK/CardIO'
+ pod 'VGSCollectSDK', :git => 'https://github.com/dmytrokhl/vgs-collect-ios.git', :branch => 'feature/ch65996/textfield_customization'
+ pod 'VGSCollectSDK/CardIO', :git => 'https://github.com/dmytrokhl/vgs-collect-ios.git', :branch => 'feature/ch65996/textfield_customization'
 
   target 'Spacy FoodTests' do
     inherit! :search_paths

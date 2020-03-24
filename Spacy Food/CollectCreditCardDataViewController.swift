@@ -14,6 +14,7 @@ struct SecuredCardData {
     let cardNumberAlias: String
     let cvcAlias: String
     let expDataAlias: String
+    var cardNumberBin: String = ""
     var cardNumberLast4: String = ""
     var cardBrand: String = ""
 }
@@ -76,40 +77,48 @@ class CollectCreditCardDataViewController: UIViewController {
     
     private func setupElementsConfiguration() {
         let textColor = UIColor.white
+        let tintColor = UIColor.white
+        let placeholderColor = UIColor.init(white: 1, alpha: 0.8)
         let textFont = UIFont.systemFont(ofSize: 22)
         let padding = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
 
         let cardConfiguration = VGSConfiguration(collector: collector, fieldName: "card_number")
         cardConfiguration.type = .cardNumber
         cardConfiguration.isRequiredValidOnly = true
+        cardConfiguration.keyboardAppearance = .dark
         
         cardNumber.configuration = cardConfiguration
         cardNumber.textColor = textColor
+        cardNumber.tintColor = tintColor
         cardNumber.font = textFont
         cardNumber.padding = padding
-        cardNumber.placeholder = "Card Number"
+        cardNumber.attributedPlaceholder = NSAttributedString(string: "Card Number", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
         cardNumber.textAlignment = .natural
-
+        
         let expDateConfiguration = VGSConfiguration(collector: collector, fieldName: "card_expirationDate")
         expDateConfiguration.isRequiredValidOnly = true
         expDateConfiguration.type = .expDate
-
+        expDateConfiguration.keyboardAppearance = .dark
+        
         expCardDate.configuration = expDateConfiguration
         expCardDate.textColor = textColor
+        expCardDate.tintColor = tintColor
         expCardDate.font = textFont
         expCardDate.padding = padding
-        expCardDate.placeholder = "MM/YY"
+        expCardDate.attributedPlaceholder = NSAttributedString(string: "MM/YY", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
         expCardDate.textAlignment = .center
         
         let cvcConfiguration = VGSConfiguration(collector: collector, fieldName: "card_cvc")
         cvcConfiguration.isRequired = true
         cvcConfiguration.type = .cvc
+        cvcConfiguration.keyboardAppearance = .dark
 
         cvcCardNum.configuration = cvcConfiguration
         cvcCardNum.textColor = textColor
+        cvcCardNum.tintColor = tintColor
         cvcCardNum.font = textFont
         cvcCardNum.padding = padding
-        cvcCardNum.placeholder = "CVC"
+        cvcCardNum.attributedPlaceholder = NSAttributedString(string: "CVC", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
         cvcCardNum.textAlignment = .center
 
         // Configure native UI elements
@@ -118,9 +127,12 @@ class CollectCreditCardDataViewController: UIViewController {
         cardHolderName.layer.cornerRadius = 4
         
         cardHolderName.autocorrectionType = .no
-        cardHolderName.textColor = .white
-        cardHolderName.placeholder = "Cardholder Name"
+        cardHolderName.textColor = textColor
+        cardHolderName.tintColor = tintColor
+        cardHolderName.attributedPlaceholder = NSAttributedString(string: "Cardholder Name", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
         cardHolderName.font = textFont
+        cardHolderName.keyboardAppearance = .dark
+        
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: cardHolderName.frame.height))
         let actionButton = UIButton(frame: CGRect(x: cardHolderName.bounds.origin.x + 10, y: 0, width: 8, height: cardHolderName.frame.height))
         actionButton.imageView?.image = UIImage(named: "scan_icon")
@@ -143,7 +155,8 @@ class CollectCreditCardDataViewController: UIViewController {
         
         //check card state attribures
         let cardState = cardNumber.state as? CardState
-        let last4 = cardState?.last4 ?? ""
+        let bin = cardState?.bin ?? "****"
+        let last4 = cardState?.last4 ?? "****"
         let brand = cardState?.cardBrand.stringValue() ?? ""
         
         collector.submit(path: "/post") { [weak self](json, error) in
@@ -153,7 +166,7 @@ class CollectCreditCardDataViewController: UIViewController {
                 let cvcAlias = data["card_cvc"]  as? String,
                 let expDataAlias = data["card_expirationDate"]  as? String  {
                 
-                let cardData = SecuredCardData.init(cardNumberAlias: cardNumberAlias, cvcAlias: cvcAlias, expDataAlias: expDataAlias, cardNumberLast4: last4, cardBrand: brand)
+                let cardData = SecuredCardData(cardNumberAlias: cardNumberAlias, cvcAlias: cvcAlias, expDataAlias: expDataAlias, cardNumberBin: bin, cardNumberLast4: last4, cardBrand: brand)
                 self?.onCompletion?(cardData)
                 self?.dismiss(animated: true, completion: nil)
                 
@@ -245,18 +258,18 @@ extension CollectCreditCardDataViewController {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        let userInfo = notification.userInfo
-        
         guard keyboardVisible == false else {
             return
         }
         keyboardVisible = true
         
+        let userInfo = notification.userInfo
+
         if let info = userInfo, let kbRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let height = kbRect.size.height - 40.0
             self.maxLevel = height
             self.containerViewBottomConstraint.constant = height
-            UIView.animate(withDuration: 10, delay: 0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 4, delay: 0, options: .curveEaseOut, animations: {
                 self.bluredBackground.alpha = 0.9
                 self.view.layoutIfNeeded()
             }, completion: nil)

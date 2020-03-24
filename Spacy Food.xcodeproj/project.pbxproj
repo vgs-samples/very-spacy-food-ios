@@ -14,6 +14,8 @@
 		3213004024193DB70062FEF0 /* Spacy_FoodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3213003F24193DB70062FEF0 /* Spacy_FoodTests.swift */; };
 		3213004D241B952E0062FEF0 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3213004C241B952E0062FEF0 /* MenuViewController.swift */; };
 		3213004F241BA1610062FEF0 /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3213004E241BA1610062FEF0 /* MenuItemCell.swift */; };
+		32549F85242A5FC800073BF3 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32549F84242A5FC800073BF3 /* LoadingView.swift */; };
+		32549F87242A5FD200073BF3 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32549F86242A5FD200073BF3 /* LoadingView.xib */; };
 		327F8E8924227A0200112868 /* CollectCreditCardDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327F8E8824227A0200112868 /* CollectCreditCardDataViewController.swift */; };
 		327F8E8F2423BE6A00112868 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327F8E8E2423BE6A00112868 /* CheckoutViewController.swift */; };
 		32AAAC4A24212C4200A68317 /* MenuItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AAAC4924212C4200A68317 /* MenuItemDetailsViewController.swift */; };
@@ -43,6 +45,8 @@
 		3213004124193DB70062FEF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3213004C241B952E0062FEF0 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		3213004E241BA1610062FEF0 /* MenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
+		32549F84242A5FC800073BF3 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		32549F86242A5FD200073BF3 /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		327F8E8824227A0200112868 /* CollectCreditCardDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectCreditCardDataViewController.swift; sourceTree = "<group>"; };
 		327F8E8E2423BE6A00112868 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		32AAAC4924212C4200A68317 /* MenuItemDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemDetailsViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 				327F8E8824227A0200112868 /* CollectCreditCardDataViewController.swift */,
 				327F8E8E2423BE6A00112868 /* CheckoutViewController.swift */,
 				3213004E241BA1610062FEF0 /* MenuItemCell.swift */,
+				32549F84242A5FC800073BF3 /* LoadingView.swift */,
+				32549F86242A5FD200073BF3 /* LoadingView.xib */,
 				3213002E24193DB50062FEF0 /* Main.storyboard */,
 				3213003124193DB70062FEF0 /* Assets.xcassets */,
 				3213003324193DB70062FEF0 /* LaunchScreen.storyboard */,
@@ -225,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3213003524193DB70062FEF0 /* LaunchScreen.storyboard in Resources */,
+				32549F87242A5FD200073BF3 /* LoadingView.xib in Resources */,
 				3213003224193DB70062FEF0 /* Assets.xcassets in Resources */,
 				3213003024193DB50062FEF0 /* Main.storyboard in Resources */,
 			);
@@ -313,6 +320,7 @@
 				327F8E8924227A0200112868 /* CollectCreditCardDataViewController.swift in Sources */,
 				3213004D241B952E0062FEF0 /* MenuViewController.swift in Sources */,
 				327F8E8F2423BE6A00112868 /* CheckoutViewController.swift in Sources */,
+				32549F85242A5FC800073BF3 /* LoadingView.swift in Sources */,
 				32AAAC4A24212C4200A68317 /* MenuItemDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,6 +11,13 @@ import UIKit
 
 class CheckoutViewController: UIViewController {
     
+    @IBOutlet weak var payWithLabel: UILabel!
+    @IBOutlet weak var cardNumberLabel: UILabel!
+    
+    lazy var loadingView: LoadingView = {
+        return LoadingView.fromNib()!
+    }()
+    
     var orderItems = [Any]()
     var securedCardData: SecuredCardData!
     
@@ -21,10 +28,21 @@ class CheckoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let cardBrand = securedCardData.cardBrand.isEmpty ? "credit" : securedCardData.cardBrand
+        let first4 = securedCardData.cardNumberBin.prefix(4)
+        payWithLabel.text = "Pay with your \(cardBrand) card"
+        cardNumberLabel.text = "\(first4) **** **** \(securedCardData.cardNumberLast4)"
+        
+        loadingView.frame = self.view.bounds
+        loadingView.isHidden = true
+        view.addSubview(loadingView)
+        
     }
 
     @IBAction func payAction(_ sender: Any) {
-        
+    
+        loadingView.isHidden = false
+        view.bringSubviewToFront(loadingView)
     }
     
     @IBAction func backAction(_ sender: Any) {
