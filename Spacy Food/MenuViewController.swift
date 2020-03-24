@@ -16,9 +16,12 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var checkoutButton: UIButton!
     @IBOutlet weak var counterLabel: UILabel!
     
+    let haptic = UIImpactFeedbackGenerator()
+
     var orderItemsCount: Int = 0 {
         didSet {
             counterLabel.text = "\(orderItemsCount)"
+            haptic.impactOccurred()
         }
     }
     
@@ -68,16 +71,18 @@ class MenuViewController: UIViewController {
             proceedToCheckout([Any](), cardData: securedCardData)
         } else {
             showCollectCardDataView()
+            haptic.impactOccurred()
         }
     }
     
     private func showCollectCardDataView() {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let collectCardVC = mainStoryboard.instantiateViewController(withIdentifier: "CollectCreditCardDataViewController") as! CollectCreditCardDataViewController
+        collectCardVC.modalPresentationStyle = .overCurrentContext
         collectCardVC.onCompletion = { [weak self] (cardData) in
             self?.securedCardData = cardData
         }
-        self.present(collectCardVC, animated: true, completion: nil)
+        self.present(collectCardVC, animated: false, completion: nil)
     }
     
     private func proceedToCheckout(_ orderItems: [Any], cardData: SecuredCardData) {
