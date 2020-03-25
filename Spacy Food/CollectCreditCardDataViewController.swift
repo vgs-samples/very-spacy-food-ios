@@ -168,7 +168,7 @@ class CollectCreditCardDataViewController: UIViewController {
                 
                 let cardData = SecuredCardData(cardNumberAlias: cardNumberAlias, cvcAlias: cvcAlias, expDataAlias: expDataAlias, cardNumberBin: bin, cardNumberLast4: last4, cardBrand: brand)
                 self?.onCompletion?(cardData)
-                self?.dismiss(animated: true, completion: nil)
+                self?.dismiss(animated: false, completion: nil)
                 
                 self?.notificationFeedbackGenerator.notificationOccurred(.success)
             } else {

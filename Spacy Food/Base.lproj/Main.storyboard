@@ -54,7 +54,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_item_img1" translatesAutoresizingMaskIntoConstraints="NO" id="JwW-Z4-E6V">
-                                                    <rect key="frame" x="30" y="20" width="354" height="164.00000000000011"/>
+                                                    <rect key="frame" x="30" y="20" width="354" height="164"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="164" id="QzW-eB-2wH"/>
                                                     </constraints>
@@ -227,7 +227,7 @@
                                 <rect key="frame" x="-100" y="-56" width="614" height="1018"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_item_img1" translatesAutoresizingMaskIntoConstraints="NO" id="5KK-VB-0gh">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="509.00000000000011"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="509"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="12"/>
@@ -351,7 +351,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="378"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_down_icon" translatesAutoresizingMaskIntoConstraints="NO" id="XEW-Lw-ggX">
-                                        <rect key="frame" x="190" y="15" width="34.000000000000028" height="10"/>
+                                        <rect key="frame" x="190" y="15" width="34" height="10"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="34" id="40p-RW-zs1"/>
                                             <constraint firstAttribute="height" constant="10" id="azM-20-O8u"/>
@@ -705,7 +705,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rocket" translatesAutoresizingMaskIntoConstraints="NO" id="duL-Rj-3F6">
-                                <rect key="frame" x="167" y="268" width="80.000000000000057" height="80"/>
+                                <rect key="frame" x="167" y="268" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="8Cn-12-Qhm"/>
                                     <constraint firstAttribute="height" constant="80" id="qim-WJ-eV9"/>

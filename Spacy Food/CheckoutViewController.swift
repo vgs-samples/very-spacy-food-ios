@@ -73,6 +73,7 @@ class CheckoutViewController: UIViewController {
     func setLoadingView(hidden: Bool) {
         loadingView.isHidden = hidden
         hidden ? view.sendSubviewToBack(loadingView) : view.bringSubviewToFront(loadingView)
+        hidden ? loadingView.stopAnimation() : loadingView.startAnimation()
     }
     
     

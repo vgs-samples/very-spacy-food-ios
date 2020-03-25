@@ -17,8 +17,8 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="O6S-78-DkT">
                     <rect key="frame" x="-100" y="-100" width="614" height="1062"/>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Saturn" translatesAutoresizingMaskIntoConstraints="NO" id="y4r-76-fTH">
-                    <rect key="frame" x="119.5" y="360.5" width="175" height="175"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="saturn_1" translatesAutoresizingMaskIntoConstraints="NO" id="y4r-76-fTH">
+                    <rect key="frame" x="119.5" y="360.5" width="175.00000000000006" height="175"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="y4r-76-fTH" secondAttribute="height" id="8H2-Jt-8XB"/>
                     </constraints>
@@ -45,11 +45,14 @@
                 <constraint firstItem="Re3-Di-gtp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Kls-UK-bKv" secondAttribute="top" constant="2" id="vjV-bL-8h2"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Kls-UK-bKv"/>
+            <connections>
+                <outlet property="imageView" destination="y4r-76-fTH" id="DHy-5V-yfc"/>
+            </connections>
             <point key="canvasLocation" x="293" y="21"/>
         </view>
     </objects>
     <resources>
-        <image name="Saturn" width="336" height="339"/>
         <image name="background" width="1125" height="2436"/>
+        <image name="saturn_1" width="249" height="240"/>
     </resources>
 </document>
