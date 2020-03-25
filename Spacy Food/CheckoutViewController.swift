@@ -41,11 +41,44 @@ class CheckoutViewController: UIViewController {
 
     @IBAction func payAction(_ sender: Any) {
     
-        loadingView.isHidden = false
-        view.bringSubviewToFront(loadingView)
+        setLoadingView(hidden: false)
+        
+        let url = URL(string: "https://lu38a8wiw3.execute-api.us-west-2.amazonaws.com/demo-payment-processor")!
+        let session = URLSession.shared
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        session.dataTask(with: request, completionHandler: { [weak self](data: Data?, response: URLResponse?, error: Error?) in
+            
+            if error == nil, let httpResponse = response as? HTTPURLResponse  {
+                if httpResponse.statusCode == 200 {
+                    print("success")
+                    DispatchQueue.main.async {
+                        self?.showConfirmationScreen()
+                    }
+                    return
+                }
+            } else {
+                print("Something goes wrong!")
+            }
+            self?.setLoadingView(hidden: true)
+        }).resume()
     }
     
     @IBAction func backAction(_ sender: Any) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func setLoadingView(hidden: Bool) {
+        loadingView.isHidden = hidden
+        hidden ? view.sendSubviewToBack(loadingView) : view.bringSubviewToFront(loadingView)
+    }
+    
+    
+    func showConfirmationScreen() {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let confirmationVC = mainStoryboard.instantiateViewController(withIdentifier: "ConfirmationViewController") as! ConfirmationViewController
+        navigationController?.pushViewController(confirmationVC, animated: true)
     }
 }
