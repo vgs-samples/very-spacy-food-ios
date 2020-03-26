@@ -11,6 +11,10 @@ import UIKit
 
 class ConfirmationViewController: UIViewController {
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     @IBAction func closeAction(_ sender: Any) {
         if let menuVC = navigationController?.viewControllers.first as? MenuViewController {
             menuVC.orderItemsCount = 0
