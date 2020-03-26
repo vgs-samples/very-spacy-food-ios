@@ -44,6 +44,9 @@ class CollectCreditCardDataViewController: UIViewController {
     let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
     let impactFeedbackGenerator = UIImpactFeedbackGenerator()
     var onCompletion: ((SecuredCardData) -> Void )?
+    
+    // Track VGSTextFields with not valid input on Submit
+    var notValidTextFields = Set<VGSTextField>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +57,13 @@ class CollectCreditCardDataViewController: UIViewController {
         addGestureRecognizer()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
+        
+        collector.observeFieldState = { (textfield) in
+            if self.notValidTextFields.contains(textfield) {
+                self.notValidTextFields.remove(textfield)
+                textfield.layer.borderColor = UIColor.white.cgColor
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -153,6 +163,10 @@ class CollectCreditCardDataViewController: UIViewController {
     @IBAction func save(_ sender: Any) {
         impactFeedbackGenerator.impactOccurred()
         
+        guard validateInputData() else {
+            return
+        }
+        
         //check card state attribures
         let cardState = cardNumber.state as? CardState
         let bin = cardState?.bin ?? "****"
@@ -181,6 +195,23 @@ class CollectCreditCardDataViewController: UIViewController {
                 self?.notificationFeedbackGenerator.notificationOccurred(.error)
             }
         }
+    }
+    
+    func validateInputData() -> Bool {
+        notValidTextFields.removeAll()
+        if !cardNumber.state.isValid {
+            cardNumber.layer.borderColor = UIColor.red.cgColor
+            notValidTextFields.insert(cardNumber)
+        }
+        if !expCardDate.state.isValid {
+            expCardDate.layer.borderColor = UIColor.red.cgColor
+            notValidTextFields.insert(expCardDate)
+        }
+        if !cvcCardNum.state.isValid {
+            cvcCardNum.layer.borderColor = UIColor.red.cgColor
+            notValidTextFields.insert(cvcCardNum)
+        }
+        return notValidTextFields.count == 0
     }
 }
 
@@ -276,4 +307,3 @@ extension CollectCreditCardDataViewController {
         }
     }
 }
-
