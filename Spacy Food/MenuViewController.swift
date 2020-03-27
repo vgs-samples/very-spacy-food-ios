@@ -136,6 +136,7 @@ extension MenuViewController: UITableViewDelegate {
             self?.orderItemsCount += 1
             self?.orderPrice += selectedItem.price
         }
+        detailsVC.modalPresentationStyle = .overCurrentContext
         self.present(detailsVC, animated: true, completion: nil)
     }
 }
