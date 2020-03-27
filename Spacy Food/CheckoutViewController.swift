@@ -11,6 +11,7 @@ import UIKit
 
 class CheckoutViewController: UIViewController {
     
+    @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var payWithLabel: UILabel!
     @IBOutlet weak var cardNumberLabel: UILabel!
     
@@ -18,7 +19,7 @@ class CheckoutViewController: UIViewController {
         return LoadingView.fromNib()!
     }()
     
-    var orderItems = [Any]()
+    var orderPrice: Double = 14.15
     var securedCardData: SecuredCardData!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -33,6 +34,7 @@ class CheckoutViewController: UIViewController {
         payWithLabel.text = "Pay with your \(cardBrand) card"
         cardNumberLabel.text = "\(first4) **** **** \(securedCardData.cardNumberLast4)"
         
+        priceLabel.text = "$\(orderPrice.truncate(places: 2))"
         loadingView.frame = self.view.bounds
         loadingView.isHidden = true
         view.addSubview(loadingView)
@@ -80,6 +82,8 @@ class CheckoutViewController: UIViewController {
     func showConfirmationScreen() {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let confirmationVC = mainStoryboard.instantiateViewController(withIdentifier: "ConfirmationViewController") as! ConfirmationViewController
+        confirmationVC.orderPrice = orderPrice
+        confirmationVC.cardNumber = cardNumberLabel.text ?? "4111 **** **** 1111"
         navigationController?.pushViewController(confirmationVC, animated: true)
     }
 }

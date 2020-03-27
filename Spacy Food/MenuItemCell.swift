@@ -15,12 +15,9 @@ class MenuItemCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var ingredients: UILabel!
-    
+
     var onAddItemClicked: (()-> Void)?
-    
-    override func awakeFromNib() {
-        
-    }
+
     
     @IBAction func addItemAction(_ sender: Any) {
         self.onAddItemClicked?()
