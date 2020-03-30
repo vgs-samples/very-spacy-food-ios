@@ -26,9 +26,9 @@ Clone Very Spacy Food application repository.
 
 Install application pods.
 
-Open Terminal and change working directory to `demoapp` that is inside `ios-sdk-demo` folder:
+Open Terminal and change working directory to `Very Spacy Food` application folder:
 
-`$ cd ~/Very Spacy Food`
+`$ cd Very\ Spacy\ Food/`
 
 Install pods:
 
@@ -49,17 +49,23 @@ and replace `vaultId` with your organization
 
 Run the application.
 Add some items to cart, then press **Add card data** button, you will be navigated to screnn with VGSCollect forms.
-Type test card data, e.x.:
+Type test card data(should include valid card number), e.x.:
 
-*Cardholder Name*  
-``Joe Business``
+``` swift
 
-*Card Number*   
-``4111111111111111``
+// Cardholder Name 
+Joe Business
 
-*Exp. Date*   *CVC*  
-``11/22``     ``123``
+// Card Number   
+4111111111111111
 
+// Exp. Date  
+11/22
+
+//CVC code
+123
+
+```
 Press **Save** button. Then data will be submitted to VGS.  
 Go to the Logs tab on <a href="http://dashboard.verygoodsecurity.com" target="_blank">Dashboard</a>, find request and secure a payload.  
 Instruction for this step you can find <a href="https://www.verygoodsecurity.com/docs/getting-started/quick-integration#securing-inbound-connection" target="_blank">here</a>.
