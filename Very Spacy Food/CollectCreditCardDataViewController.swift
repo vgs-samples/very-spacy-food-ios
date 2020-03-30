@@ -21,6 +21,8 @@ struct SecuredCardData {
     var cardBrand: String = ""
 }
 
+let vaultId = "tnttftgwu66"
+
 class CollectCreditCardDataViewController: UIViewController {
 
     @IBOutlet weak var cardDataStackView: UIStackView!
@@ -28,7 +30,7 @@ class CollectCreditCardDataViewController: UIViewController {
     @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
     
     // Init VGS Collector
-    var collector = VGSCollect(id: "tnttftgwu66", environment: .sandbox)
+    var collector = VGSCollect(id: vaultId, environment: .sandbox)
     
     // VGS Elements
     var cardNumber = VGSCardTextField()
