@@ -19,6 +19,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITextField.appearance().keyboardAppearance = UIKeyboardAppearance.dark
         return true
     }
-
 }
 

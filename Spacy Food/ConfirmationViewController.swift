@@ -14,12 +14,8 @@ class ConfirmationViewController: UIViewController {
     @IBOutlet weak var cardNumberLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     
-    var orderPrice: Double = 14.55
-    var cardNumber = "4111 **** **** 1111"
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+    var orderPrice: Double = 0
+    var cardNumber = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +26,9 @@ class ConfirmationViewController: UIViewController {
     @IBAction func closeAction(_ sender: Any) {
         if let menuVC = navigationController?.viewControllers.first as? MenuViewController {
             menuVC.orderItemsCount = 0
+            menuVC.orderPrice = 0
             menuVC.counterLabel.text = ""
             menuVC.securedCardData = nil
-            menuVC.orderPrice = 0
         }
         navigationController?.popToRootViewController(animated: true)
     }

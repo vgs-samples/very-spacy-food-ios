@@ -11,9 +11,11 @@ import UIKit
 import VGSCollectSDK
 
 struct SecuredCardData {
+    /// PCI data aliases
     let cardNumberAlias: String
     let cvcAlias: String
     let expDataAlias: String
+
     var cardNumberBin: String = ""
     var cardNumberLast4: String = ""
     var cardBrand: String = ""
@@ -38,7 +40,7 @@ class CollectCreditCardDataViewController: UIViewController {
     var cardHolderName = UITextField()
     
     // Helpers
-    var keyboardVisible = false
+    var isKeyboardVisible = false
     var maxLevel = 0 as CGFloat
     var initialTouchPoint = CGPoint.zero
     let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
@@ -169,8 +171,8 @@ class CollectCreditCardDataViewController: UIViewController {
         
         //check card state attribures
         let cardState = cardNumber.state as? CardState
-        let bin = cardState?.bin ?? "****"
-        let last4 = cardState?.last4 ?? "****"
+        let bin = cardState?.bin ?? ""
+        let last4 = cardState?.last4 ?? ""
         let brand = cardState?.cardBrand.stringValue() ?? ""
         
         collector.submit(path: "/post") { [weak self](json, error) in
@@ -186,11 +188,8 @@ class CollectCreditCardDataViewController: UIViewController {
                 
                 self?.notificationFeedbackGenerator.notificationOccurred(.success)
             } else {
-
                 if let error = error as? NSError {
                     print(error.description)
-                } else {
-                    // data not full
                 }
                 self?.notificationFeedbackGenerator.notificationOccurred(.error)
             }
@@ -283,16 +282,11 @@ extension CollectCreditCardDataViewController {
         }
     }
     
-    func changeContainerPosition(_ delta: CGFloat) {
-        containerViewBottomConstraint.constant = maxLevel - delta
-        view.layoutIfNeeded()
-    }
-    
     @objc func keyboardWillShow(notification: NSNotification) {
-        guard keyboardVisible == false else {
+        guard isKeyboardVisible == false else {
             return
         }
-        keyboardVisible = true
+        isKeyboardVisible = true
         
         let userInfo = notification.userInfo
 
@@ -305,5 +299,10 @@ extension CollectCreditCardDataViewController {
                 self.view.layoutIfNeeded()
             }, completion: nil)
         }
+    }
+    
+    func changeContainerPosition(_ delta: CGFloat) {
+        containerViewBottomConstraint.constant = maxLevel - delta
+        view.layoutIfNeeded()
     }
 }

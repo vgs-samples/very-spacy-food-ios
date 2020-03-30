@@ -15,6 +15,7 @@ struct MenuItem {
     let ingredients: String
     let weight: String
     let price: Double
+    let associatedColor: UIColor
 }
 
 class MenuItemDetailsViewController: UIViewController {
@@ -25,26 +26,20 @@ class MenuItemDetailsViewController: UIViewController {
     @IBOutlet weak var ingredients: UILabel!
     @IBOutlet weak var price: UILabel!
     
-    
-    var menuItem: MenuItem?
+    var menuItem: MenuItem!
     var onItemAdded: ((MenuItem?) -> Void)?
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let item = menuItem {
-            itemImageView.image = UIImage.init(named: item.imgName)
-            itemTitle.text = item.name
-            ingredients.text = item.ingredients
-            price.text = "$\(item.price)"
-        }
+        itemImageView.image = UIImage.init(named: menuItem.imgName)
+        itemTitle.text = menuItem.name
+        ingredients.text = menuItem.ingredients
+        price.text = "$\(menuItem.price)"
         
         view.layoutIfNeeded()
-        backgroundView.backgroundColor = randomColor()
+        backgroundView.backgroundColor = menuItem.associatedColor
         backgroundView.layer.cornerRadius = 54
         backgroundView.layer.maskedCorners = [.layerMinXMaxYCorner]
     }
@@ -60,24 +55,5 @@ class MenuItemDetailsViewController: UIViewController {
     
     @IBAction func closeAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    func randomColor() -> UIColor {
-        return [
-            UIColor(red: 0.18, green: 0.69, blue: 0.569, alpha: 1),
-            UIColor(red: 0.925, green: 0.655, blue: 0.365, alpha: 1),
-            UIColor(red: 0.783, green: 0.345, blue: 0.32, alpha: 1),
-            UIColor(red: 0.833, green: 0.483, blue: 0.609, alpha: 1),
-            UIColor(red: 1, green: 0.773, blue: 0.371, alpha: 1)
-            ].randomElement() ?? UIColor.red
-    }
-}
-
-extension UIView {
-   func roundCorners(corners: UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        layer.mask = mask
     }
 }

@@ -9,22 +9,20 @@
 import Foundation
 import UIKit
 
+let bakendUrl = "https://lu38a8wiw3.execute-api.us-west-2.amazonaws.com/demo-payment-processor"
+
 class CheckoutViewController: UIViewController {
     
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var payWithLabel: UILabel!
     @IBOutlet weak var cardNumberLabel: UILabel!
-    
+
+    var orderPrice: Double = 0
+    var securedCardData: SecuredCardData!
     lazy var loadingView: LoadingView = {
         return LoadingView.fromNib()!
     }()
     
-    var orderPrice: Double = 14.15
-    var securedCardData: SecuredCardData!
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-         return .lightContent
-     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,28 +31,22 @@ class CheckoutViewController: UIViewController {
         let first4 = securedCardData.cardNumberBin.prefix(4)
         payWithLabel.text = "Pay with your \(cardBrand) card"
         cardNumberLabel.text = "\(first4) **** **** \(securedCardData.cardNumberLast4)"
-        
         priceLabel.text = "$\(orderPrice.truncate(places: 2))"
-        loadingView.frame = self.view.bounds
-        loadingView.isHidden = true
-        view.addSubview(loadingView)
-        
+
+        setupLoadingView()
     }
 
     @IBAction func payAction(_ sender: Any) {
-    
         setLoadingView(hidden: false)
         
-        let url = URL(string: "https://lu38a8wiw3.execute-api.us-west-2.amazonaws.com/demo-payment-processor")!
-        let session = URLSession.shared
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: URL(string: bakendUrl)!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        session.dataTask(with: request, completionHandler: { [weak self](data: Data?, response: URLResponse?, error: Error?) in
+        URLSession.shared.dataTask(with: request, completionHandler: { [weak self](data: Data?, response: URLResponse?, error: Error?) in
             
             if error == nil, let httpResponse = response as? HTTPURLResponse  {
-                if httpResponse.statusCode == 200 {
+                if (200..<300).contains(httpResponse.statusCode) {
                     print("success")
                     DispatchQueue.main.async {
                         self?.showConfirmationScreen()
@@ -71,6 +63,16 @@ class CheckoutViewController: UIViewController {
     @IBAction func backAction(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
+}
+
+//MARK: - UI settings
+extension CheckoutViewController {
+    
+    func setupLoadingView() {
+        loadingView.frame = self.view.bounds
+        loadingView.isHidden = true
+        view.addSubview(loadingView)
+    }
     
     func setLoadingView(hidden: Bool) {
         loadingView.isHidden = hidden
@@ -80,10 +82,9 @@ class CheckoutViewController: UIViewController {
     
     
     func showConfirmationScreen() {
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let confirmationVC = mainStoryboard.instantiateViewController(withIdentifier: "ConfirmationViewController") as! ConfirmationViewController
+        let confirmationVC = UIStoryboard.main.instantiateViewController(withIdentifier: "ConfirmationViewController") as! ConfirmationViewController
         confirmationVC.orderPrice = orderPrice
-        confirmationVC.cardNumber = cardNumberLabel.text ?? "4111 **** **** 1111"
+        confirmationVC.cardNumber = cardNumberLabel.text ?? ""
         navigationController?.pushViewController(confirmationVC, animated: true)
     }
 }

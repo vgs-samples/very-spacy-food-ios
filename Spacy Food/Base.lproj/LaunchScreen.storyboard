@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_loading_view" translatesAutoresizingMaskIntoConstraints="NO" id="vop-Zb-I1A">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_loading_view" translatesAutoresizingMaskIntoConstraints="NO" id="vop-Zb-I1A">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VERY SPACY FOOD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Me-Fp-8hm">
@@ -29,12 +29,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="vop-Zb-I1A" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="7G5-tc-ExF"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vop-Zb-I1A" secondAttribute="trailing" id="B88-DZ-7gY"/>
+                            <constraint firstAttribute="trailing" secondItem="vop-Zb-I1A" secondAttribute="trailing" id="B88-DZ-7gY"/>
                             <constraint firstItem="4Me-Fp-8hm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="KeU-gf-xGO"/>
                             <constraint firstAttribute="trailing" secondItem="4Me-Fp-8hm" secondAttribute="trailing" constant="8" id="RcY-Lp-5re"/>
                             <constraint firstItem="4Me-Fp-8hm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="hh3-C0-JU4"/>
                             <constraint firstAttribute="bottom" secondItem="vop-Zb-I1A" secondAttribute="bottom" id="lyn-NQ-R0J"/>
-                            <constraint firstItem="vop-Zb-I1A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="neG-9c-UDR"/>
+                            <constraint firstItem="vop-Zb-I1A" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="neG-9c-UDR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
