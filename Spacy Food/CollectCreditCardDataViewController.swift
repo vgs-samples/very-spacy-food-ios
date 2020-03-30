@@ -37,7 +37,9 @@ class CollectCreditCardDataViewController: UIViewController {
     var scanController: VGSCardIOScanController?
 
     // Native UI Elements
-    var cardHolderName = UITextField()
+    lazy var cardHolderName: CardHolderTextFieldView = {
+        return CardHolderTextFieldView.fromNib()!
+    }()
     
     // Helpers
     var isKeyboardVisible = false
@@ -52,16 +54,18 @@ class CollectCreditCardDataViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        buildUI()
-        setupElementsConfiguration()
+        
+        arrangeTextFields()
+        setupTextFieldConfigurations()
         
         // Helpers
         addGestureRecognizer()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
-        
+        // Observe active vgs textfields state when editing
         collector.observeFieldState = { (textfield) in
             if self.notValidTextFields.contains(textfield) {
+                // Update textfield UI
                 self.notValidTextFields.remove(textfield)
                 textfield.layer.borderColor = UIColor.white.cgColor
             }
@@ -70,12 +74,12 @@ class CollectCreditCardDataViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        cardHolderName.becomeFirstResponder()
+        cardHolderName.textField.becomeFirstResponder()
     }
     
-    // MARK: - Setup UI
-    private func buildUI() {
-
+    // MARK: - Arrange Textfields
+    private func arrangeTextFields() {
+        cardHolderName.scanButton.addTarget(self, action: #selector(scan), for: .touchUpInside)
         cardDataStackView.addArrangedSubview(cardHolderName)
         cardDataStackView.addArrangedSubview(cardNumber)
         
@@ -87,7 +91,7 @@ class CollectCreditCardDataViewController: UIViewController {
         cardDataStackView.addArrangedSubview(bottomStackView)
     }
     
-    private func setupElementsConfiguration() {
+    private func setupTextFieldConfigurations() {
         let textColor = UIColor.white
         let tintColor = UIColor.white
         let placeholderColor = UIColor.init(white: 1, alpha: 0.8)
@@ -138,21 +142,11 @@ class CollectCreditCardDataViewController: UIViewController {
         cardHolderName.layer.borderColor = UIColor.lightGray.cgColor
         cardHolderName.layer.cornerRadius = 4
         
-        cardHolderName.autocorrectionType = .no
-        cardHolderName.textColor = textColor
-        cardHolderName.tintColor = tintColor
-        cardHolderName.attributedPlaceholder = NSAttributedString(string: "Cardholder Name", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
-        cardHolderName.font = textFont
-        cardHolderName.keyboardAppearance = .dark
-        
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: cardHolderName.frame.height))
-        let actionButton = UIButton(frame: CGRect(x: cardHolderName.bounds.origin.x + 10, y: 0, width: 8, height: cardHolderName.frame.height))
-        actionButton.imageView?.image = UIImage(named: "scan_icon")
-        actionButton.addTarget(self, action: #selector(scan), for: .touchUpInside)
-        cardHolderName.leftView = paddingView
-        cardHolderName.leftViewMode = .always
-        cardHolderName.rightView = actionButton
-        cardHolderName.rightViewMode = .always
+        cardHolderName.textField.autocorrectionType = .no
+        cardHolderName.textField.textColor = textColor
+        cardHolderName.textField.tintColor = tintColor
+        cardHolderName.textField.attributedPlaceholder = NSAttributedString(string: "Cardholder Name", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
+        cardHolderName.textField.font = textFont
     }
     
     @objc func scan() {
