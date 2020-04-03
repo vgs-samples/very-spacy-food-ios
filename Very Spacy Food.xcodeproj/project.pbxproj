@@ -23,6 +23,7 @@
 		327F8E8924227A0200112868 /* CollectCreditCardDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327F8E8824227A0200112868 /* CollectCreditCardDataViewController.swift */; };
 		327F8E8F2423BE6A00112868 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327F8E8E2423BE6A00112868 /* CheckoutViewController.swift */; };
 		32AAAC4A24212C4200A68317 /* MenuItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AAAC4924212C4200A68317 /* MenuItemDetailsViewController.swift */; };
+		64CE6254F6513F355B61D4B4 /* Pods_Very_Spacy_FoodTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4B91C61C528B7304EA1CB2 /* Pods_Very_Spacy_FoodTests.framework */; };
 		843B166D58FA4165D5E865E5 /* Pods_Very_Spacy_Food.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9FAA78C2EE779D8F28BCF0 /* Pods_Very_Spacy_Food.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,10 +59,13 @@
 		327F8E8E2423BE6A00112868 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		32AAAC4924212C4200A68317 /* MenuItemDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemDetailsViewController.swift; sourceTree = "<group>"; };
 		3D4F9079FDCEB1FBDBF3B157 /* Pods-Spacy Food.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spacy Food.debug.xcconfig"; path = "Target Support Files/Pods-Spacy Food/Pods-Spacy Food.debug.xcconfig"; sourceTree = "<group>"; };
+		85CB1BB7BBCB07E2AA5EB2B1 /* Pods-Very Spacy FoodTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Very Spacy FoodTests.release.xcconfig"; path = "Target Support Files/Pods-Very Spacy FoodTests/Pods-Very Spacy FoodTests.release.xcconfig"; sourceTree = "<group>"; };
 		9DA6F608D3217745D7C2E73C /* Pods-Very Spacy Food.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Very Spacy Food.release.xcconfig"; path = "Target Support Files/Pods-Very Spacy Food/Pods-Very Spacy Food.release.xcconfig"; sourceTree = "<group>"; };
 		AB2BB1CD6FB846698B3FE355 /* Pods-Spacy Food.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spacy Food.release.xcconfig"; path = "Target Support Files/Pods-Spacy Food/Pods-Spacy Food.release.xcconfig"; sourceTree = "<group>"; };
+		BE4B91C61C528B7304EA1CB2 /* Pods_Very_Spacy_FoodTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Very_Spacy_FoodTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4ED15166E44F028784DBDD1 /* Pods-Very Spacy Food.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Very Spacy Food.debug.xcconfig"; path = "Target Support Files/Pods-Very Spacy Food/Pods-Very Spacy Food.debug.xcconfig"; sourceTree = "<group>"; };
 		EF9FAA78C2EE779D8F28BCF0 /* Pods_Very_Spacy_Food.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Very_Spacy_Food.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD11FDAE99475E592CF2039B /* Pods-Very Spacy FoodTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Very Spacy FoodTests.debug.xcconfig"; path = "Target Support Files/Pods-Very Spacy FoodTests/Pods-Very Spacy FoodTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64CE6254F6513F355B61D4B4 /* Pods_Very_Spacy_FoodTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				EF9FAA78C2EE779D8F28BCF0 /* Pods_Very_Spacy_Food.framework */,
+				BE4B91C61C528B7304EA1CB2 /* Pods_Very_Spacy_FoodTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -158,6 +164,8 @@
 				AB2BB1CD6FB846698B3FE355 /* Pods-Spacy Food.release.xcconfig */,
 				C4ED15166E44F028784DBDD1 /* Pods-Very Spacy Food.debug.xcconfig */,
 				9DA6F608D3217745D7C2E73C /* Pods-Very Spacy Food.release.xcconfig */,
+				FD11FDAE99475E592CF2039B /* Pods-Very Spacy FoodTests.debug.xcconfig */,
+				85CB1BB7BBCB07E2AA5EB2B1 /* Pods-Very Spacy FoodTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -188,6 +196,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3213004724193DB70062FEF0 /* Build configuration list for PBXNativeTarget "Very Spacy FoodTests" */;
 			buildPhases = (
+				EF9C7E2656D1FDE0C1203B94 /* [CP] Check Pods Manifest.lock */,
 				3213003724193DB70062FEF0 /* Sources */,
 				3213003824193DB70062FEF0 /* Frameworks */,
 				3213003924193DB70062FEF0 /* Resources */,
@@ -296,6 +305,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Very Spacy Food-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF9C7E2656D1FDE0C1203B94 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Very Spacy FoodTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -479,8 +510,9 @@
 			baseConfigurationReference = C4ED15166E44F028784DBDD1 /* Pods-Very Spacy Food.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RV64AU4P26;
+				DEVELOPMENT_TEAM = 94W3BXG8D4;
 				INFOPLIST_FILE = "Very Spacy Food/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -489,6 +521,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vgs.io.Spacy-Food";
 				PRODUCT_NAME = "Very Very Spacy Food";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -499,8 +532,9 @@
 			baseConfigurationReference = 9DA6F608D3217745D7C2E73C /* Pods-Very Spacy Food.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RV64AU4P26;
+				DEVELOPMENT_TEAM = 94W3BXG8D4;
 				INFOPLIST_FILE = "Very Spacy Food/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -509,6 +543,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vgs.io.Spacy-Food";
 				PRODUCT_NAME = "Very Very Spacy Food";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -516,6 +551,7 @@
 		};
 		3213004824193DB70062FEF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD11FDAE99475E592CF2039B /* Pods-Very Spacy FoodTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -538,6 +574,7 @@
 		};
 		3213004924193DB70062FEF0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85CB1BB7BBCB07E2AA5EB2B1 /* Pods-Very Spacy FoodTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

@@ -5,9 +5,14 @@ target 'Very Spacy Food' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for Spacy Food
+  # Pods for Very Spacy Food
 
- pod 'VGSCollectSDK', :git => 'https://github.com/dmytrokhl/vgs-collect-ios.git', :branch => 'feature/ch65996/textfield_customization'
- pod 'VGSCollectSDK/CardIO', :git => 'https://github.com/dmytrokhl/vgs-collect-ios.git', :branch => 'feature/ch65996/textfield_customization'
+ pod 'VGSCollectSDK'
+ pod 'VGSCollectSDK/CardIO'
+
+  target 'Very Spacy FoodTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
 
 end
