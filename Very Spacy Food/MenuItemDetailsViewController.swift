@@ -18,6 +18,7 @@ struct MenuItem {
     let associatedColor: UIColor
 }
 
+/// A class responsible to show available menu items
 class MenuItemDetailsViewController: UIViewController {
 
     @IBOutlet weak var backgroundView: UIView!

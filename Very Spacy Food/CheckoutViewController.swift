@@ -11,6 +11,7 @@ import UIKit
 
 let bakendUrl = "https://lu38a8wiw3.execute-api.us-west-2.amazonaws.com/demo-payment-processor"
 
+/// A class responsible for handling payment requests.
 class CheckoutViewController: UIViewController {
     
     @IBOutlet weak var priceLabel: UILabel!
@@ -37,6 +38,22 @@ class CheckoutViewController: UIViewController {
         view.addGradient(UIColor.midBlueColorsSet)
     }
 
+    
+    //MARK: - Payment request
+    
+    /**
+    This is demo payment request where you will send alias card data to our demo server. It's dont do anything with the data you send, just return "Success" response if you reach the server.
+    In real use cases, when make request to payment provider you should send card data throught VGS Outbound proxy, where the fields with alias data in request body can be revealed to original data. Then the proxy will redirect request to payment provider.
+    Also to send requests through VGS Outbound proxy you should use proxy credentials. It's not secure to store them on device or in source code, your backend should handle it.
+
+    However usual payment flow will look next:
+        - you make payment request from mobile app to your backend.
+        - optionally you can send card aliases data in request from mobile or your backend can get them from storage.
+        - your backend will send paymend aliases to payment provider through VGS Outbound proxy.
+        - when data goes through VGS Outbound proxy, aliases will be revealed to raw data and request will be redirected to payment provider that you choose.
+
+        Check more about Outbound connection in Documentation: https://www.verygoodsecurity.com/docs/guides/outbound-connection
+    */
     @IBAction func payAction(_ sender: Any) {
         setLoadingView(hidden: false)
         
@@ -82,7 +99,6 @@ extension CheckoutViewController {
         hidden ? view.sendSubviewToBack(loadingView) : view.bringSubviewToFront(loadingView)
         hidden ? loadingView.stopAnimation() : loadingView.startAnimation()
     }
-    
     
     func showConfirmationScreen() {
         let confirmationVC = UIStoryboard.main.instantiateViewController(withIdentifier: "ConfirmationViewController") as! ConfirmationViewController
