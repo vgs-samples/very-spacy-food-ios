@@ -12,34 +12,29 @@ import UIKit
 class MenuViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var checkoutButton: UIButton!
     @IBOutlet weak var counterLabel: UILabel!
     
-    var orderPrice: Double = 0.0
-    var orderItemsCount: Int = 0 {
-        didSet {
-            counterLabel.text = "\(orderItemsCount)"
-            haptic.impactOccurred()
-        }
-    }
     var securedCardData: SecuredCardData? {
         didSet {
             let title = securedCardData == nil ? "Add payment method" : "Checkout"
             checkoutButton.setTitle(title, for: .normal)
         }
     }
+    var orderPrice: Double = 0.0
+    var orderItemsCount: Int = 0 {
+        didSet {
+            counterLabel.text = "\(orderItemsCount)"
+        }
+    }
     lazy var menuItems: [MenuItem] = {
         return getAvailableMenuItems()
     }()
     
-    let haptic = UIImpactFeedbackGenerator()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        setupParallaxBackgroundView()
+        view.addGradient(UIColor.midBlueColorsSet)
     }
     
     @IBAction func checkoutAction(_ sender: UIButton) {
@@ -50,7 +45,6 @@ class MenuViewController: UIViewController {
             proceedToCheckout([Any](), cardData: securedCardData)
         } else {
             showCollectCardDataView()
-            haptic.impactOccurred()
         }
     }
 }
@@ -123,22 +117,6 @@ extension MenuViewController {
             MenuItem(imgName: "menu_item_4", name: "Alien noodle", ingredients: "Buttery, garlicky noodles served with a boiled egg, green beans, and juicy jumbo shrimp", weight: "640g", price: 13.49, associatedColor: .spacyGreen),
             MenuItem(imgName: "menu_item_5", name: "Venus fries", ingredients: "Crunchy potato fries with tomato sauce dip is a nutrishious side dish", weight: "150", price: 8.99, associatedColor: .spacyYellow)
         ]
-    }
-    
-    func setupParallaxBackgroundView() {
-        let amount = 100
-
-        let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
-        horizontal.minimumRelativeValue = -amount
-        horizontal.maximumRelativeValue = amount
-
-        let vertical = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
-        vertical.minimumRelativeValue = -amount
-        vertical.maximumRelativeValue = amount
-
-        let group = UIMotionEffectGroup()
-        group.motionEffects = [horizontal, vertical]
-        backgroundImageView.addMotionEffect(group)
     }
     
     func setupTableView() {

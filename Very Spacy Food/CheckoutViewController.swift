@@ -34,6 +34,7 @@ class CheckoutViewController: UIViewController {
         priceLabel.text = "$\(orderPrice.truncate(places: 2))"
 
         setupLoadingView()
+        view.addGradient(UIColor.midBlueColorsSet)
     }
 
     @IBAction func payAction(_ sender: Any) {

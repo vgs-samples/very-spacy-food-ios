@@ -28,6 +28,7 @@ class CollectCreditCardDataViewController: UIViewController {
     @IBOutlet weak var cardDataStackView: UIStackView!
     @IBOutlet weak var bluredBackground: UIVisualEffectView!
     @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cardFieldsContainerView: UIView!
     
     // Init VGS Collector
     var collector = VGSCollect(id: vaultId, environment: .sandbox)
@@ -47,8 +48,7 @@ class CollectCreditCardDataViewController: UIViewController {
     var isKeyboardVisible = false
     var maxLevel = 0 as CGFloat
     var initialTouchPoint = CGPoint.zero
-    let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
-    let impactFeedbackGenerator = UIImpactFeedbackGenerator()
+
     var onCompletion: ((SecuredCardData) -> Void )?
     
     // Track VGSTextFields with not valid input on Submit
@@ -60,10 +60,6 @@ class CollectCreditCardDataViewController: UIViewController {
         arrangeTextFields()
         setupTextFieldConfigurations()
         
-        // Helpers
-        addGestureRecognizer()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
         // Observe active vgs textfields state when editing
         collector.observeFieldState = { (textfield) in
             if self.notValidTextFields.contains(textfield) {
@@ -72,6 +68,11 @@ class CollectCreditCardDataViewController: UIViewController {
                 textfield.layer.borderColor = UIColor.white.cgColor
             }
         }
+        
+        // Helpers
+        addGestureRecognizer()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        cardFieldsContainerView.addGradient(UIColor.lightBlueColorsSet)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -114,7 +115,7 @@ class CollectCreditCardDataViewController: UIViewController {
         cardNumber.textAlignment = .natural
         
         let expDateConfiguration = VGSConfiguration(collector: collector, fieldName: "card_expirationDate")
-        expDateConfiguration.isRequiredValidOnly = true
+        expDateConfiguration.isRequired = true
         expDateConfiguration.type = .expDate
         expDateConfiguration.keyboardAppearance = .dark
         
@@ -159,7 +160,6 @@ class CollectCreditCardDataViewController: UIViewController {
     
     
     @IBAction func save(_ sender: Any) {
-        impactFeedbackGenerator.impactOccurred()
         
         guard validateInputData() else {
             return
@@ -181,13 +181,10 @@ class CollectCreditCardDataViewController: UIViewController {
                 let cardData = SecuredCardData(cardNumberAlias: cardNumberAlias, cvcAlias: cvcAlias, expDataAlias: expDataAlias, cardNumberBin: bin, cardNumberLast4: last4, cardBrand: brand)
                 self?.onCompletion?(cardData)
                 self?.dismiss(animated: false, completion: nil)
-                
-                self?.notificationFeedbackGenerator.notificationOccurred(.success)
             } else {
-                if let error = error as? NSError {
+                if let error = error as? VGSError {
                     print(error.description)
                 }
-                self?.notificationFeedbackGenerator.notificationOccurred(.error)
             }
         }
     }
@@ -257,8 +254,7 @@ extension CollectCreditCardDataViewController {
         case .ended, .cancelled:
              if touchPoint.y - initialTouchPoint.y > 100 {
                 self.view.endEditing(true)
-                let haptic = UIImpactFeedbackGenerator()
-                haptic.impactOccurred()
+
                 UIView.animate(withDuration: 0.1, animations: {
                     self.containerViewBottomConstraint.constant = -100
                     self.bluredBackground.alpha = 0

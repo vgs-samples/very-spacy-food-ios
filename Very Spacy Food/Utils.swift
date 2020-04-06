@@ -44,5 +44,26 @@ extension UIColor {
     static var spacyYellow: UIColor {
         return UIColor(red: 1, green: 0.773, blue: 0.371, alpha: 1)
     }
+    
+    static var lightBlueColorsSet: [CGColor] {
+        return [UIColor(red: 0.18, green: 0.34, blue: 0.70, alpha: 1).cgColor,
+                UIColor(red: 0.04, green: 0.07, blue: 0.15, alpha: 1).cgColor]
+    }
+    
+    static var midBlueColorsSet: [CGColor] {
+        return [UIColor(red: 0.11, green: 0.16, blue: 0.27, alpha: 1).cgColor,
+                UIColor(red: 0.03, green: 0.04, blue: 0.09, alpha: 1).cgColor]
+    }
+}
 
+extension UIView {
+    
+    func addGradient(_ colors: [CGColor]) {
+        let gradient = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = colors
+        gradient.startPoint = CGPoint.init(x: 0, y: 0)
+        gradient.endPoint = CGPoint.init(x: 1, y: 1)
+        self.layer.insertSublayer(gradient, at: 0)
+    }
 }

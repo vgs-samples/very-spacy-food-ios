@@ -21,6 +21,7 @@ class ConfirmationViewController: UIViewController {
         super.viewDidLoad()
         cardNumberLabel.text = cardNumber
         priceLabel.text = "$\(orderPrice.truncate(places: 2))"
+        view.addGradient(UIColor.midBlueColorsSet)
     }
     
     @IBAction func closeAction(_ sender: Any) {
