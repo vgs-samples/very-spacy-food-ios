@@ -160,12 +160,12 @@ class CollectCreditCardDataViewController: UIViewController {
     
     
     @IBAction func save(_ sender: Any) {
-        
+    
         guard validateInputData() else {
             return
         }
         
-        //check card state attribures
+        //check CardState attribures
         let cardState = cardNumber.state as? CardState
         let bin = cardState?.bin ?? ""
         let last4 = cardState?.last4 ?? ""
@@ -182,9 +182,13 @@ class CollectCreditCardDataViewController: UIViewController {
                 self?.onCompletion?(cardData)
                 self?.dismiss(animated: false, completion: nil)
             } else {
-                if let error = error as? VGSError {
+                if let error = error as? VGSError, error.type == VGSErrorType.inputDataIsNotValid {
                     print(error.description)
+                    self?.showAlert(title: "Ooops!", text: "Seems your data is not valid...")
+                } else {
+                    self?.showAlert(title: "Error", text: "Somethin went wrong!")
                 }
+                print(error)
             }
         }
     }

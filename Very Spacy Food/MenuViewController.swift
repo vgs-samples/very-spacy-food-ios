@@ -40,6 +40,7 @@ class MenuViewController: UIViewController {
     @IBAction func checkoutAction(_ sender: UIButton) {
         if let securedCardData = securedCardData {
             guard orderItemsCount > 0 else {
+                showAlert(title: "Ooops!", text: "Seems you didn't choose any item yet...")
                 return
             }
             proceedToCheckout([Any](), cardData: securedCardData)

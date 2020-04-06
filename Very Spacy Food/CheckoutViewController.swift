@@ -53,9 +53,11 @@ class CheckoutViewController: UIViewController {
                         self?.showConfirmationScreen()
                     }
                     return
+                } else {
+                    self?.showAlert(title: "Oooops!", text: error?.localizedDescription)
                 }
             } else {
-                print("Something goes wrong!")
+                self?.showAlert(title: "Request error!", text: "Something went wrong")
             }
             self?.setLoadingView(hidden: true)
         }).resume()
