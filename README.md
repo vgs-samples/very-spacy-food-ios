@@ -1,14 +1,17 @@
-# Very Spacy Food - VGSCollect iOS SDK showcase app.
+# Very Spacy Food - VGSCollect iOS SDK showcase application
 
 
 Very Spacy Food is a food ordering demo application build with **VGSCollectSDK** for secure collecting credit cards data.
 
+<p align="center">
+<img src="https://github.com/verygoodsecurity/very-spacy-food/blob/master/app_order_screen.png" width="200">    <img src="https://github.com/verygoodsecurity/very-spacy-food/blob/master/app_collect_card_data_screen.png" width="200">    <img src="https://github.com/verygoodsecurity/very-spacy-food/blob/master/app_confirmation_screen.png" width="200">
+</p>
 
 ## How to run it?
 ### Requirements
 
 - Installed latest <a href="https://apps.apple.com/us/app/xcode/id497799835?mt=12" target="_blank">Xcode</a>
-- Installed <a href="https://guides.cocoapods.org/using/getting-started.html#installation" target="_blank">CocoaPods</a>
+- Installed latest <a href="https://guides.cocoapods.org/using/getting-started.html#installation" target="_blank">CocoaPods</a>
 - Organization with <a href="https://www.verygoodsecurity.com/">VGS</a>
 
 
@@ -28,41 +31,47 @@ Install application pods.
 
 Open Terminal and change working directory to `Very Spacy Food` application folder:
 
-`$ cd Very\ Spacy\ Food/`
+    $ cd Very\ Spacy\ Food/
 
 Install pods:
 
-`pod install`
+    pod install
+
+If you already try the app before, you can check for pod updates to get the latest SDK version. In Terminal run the command:
+
+    pod update
 
 
 #### Step 4
 
-In `Very Spacy Food` folder find and open `Very Spacy Food.xcworkspace` file.
+In `Very Spacy Food` folder find and open with Xcode `Very Spacy Food.xcworkspace` file (not - `Very Spacy Food.xcodeproj`).
 In the app go to `CollectCreditCardDataViewController.swift` file, find the line:
 
-`let vaultId = "vaultId"`
+    let vaultId = "vaultId"
 
 and replace `vaultId` with your organization
  <a href="https://www.verygoodsecurity.com/docs/terminology/nomenclature#vault" target="_blank">vault id</a>. 
  
 ### Step 5 
 
-Run the application.
-Add some items to cart, then press **Add card data** button, you will be navigated to screnn with VGSCollect forms.
-Type test card data(should include valid card number), e.x.:
+Run the application and try to order some Very Spacy Food.</br>
+
+#### When on Add Credit Card Data sceen
+
+You can use test credit card data to make the order, e.x.:
 
 ``` swift
 
-// Cardholder Name 
+/// Cardholder Name 
 Joe Business
 
-// Card Number   
+/// Card Number   
 4111111111111111
 
-// Exp. Date  
+/// Exp. Date  
 11/22
 
-//CVC code
+/// CVC code
 123
 
 ```
@@ -85,3 +94,4 @@ Note that usually you shouldn't make payment request to payment provider directl
 - <a href="https://www.verygoodsecurity.com/docs/vgs-collect/ios-sdk/index" target="_blank">Documentation</a> 
 - <a href="https://github.com/verygoodsecurity/vgs-collect-ios" target="_blank">Repo</a> 
 - <a href="http://cocoapods.org/pods/VGSCollectSDK" target="_blank">CocoaPods</a> 
+- <a href="TODO" target="_blank">VGSCollectSDK API References</a> 
