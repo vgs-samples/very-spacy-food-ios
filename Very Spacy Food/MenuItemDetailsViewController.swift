@@ -43,6 +43,8 @@ class MenuItemDetailsViewController: UIViewController {
         backgroundView.backgroundColor = menuItem.associatedColor
         backgroundView.layer.cornerRadius = 54
         backgroundView.layer.maskedCorners = [.layerMinXMaxYCorner]
+        
+        view.addGradient(UIColor.midBlueColorsSet)
     }
     
     override func viewWillAppear(_ animated: Bool) {

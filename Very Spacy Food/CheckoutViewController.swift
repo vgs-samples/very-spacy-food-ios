@@ -91,6 +91,7 @@ extension CheckoutViewController {
     func setupLoadingView() {
         loadingView.frame = self.view.bounds
         loadingView.isHidden = true
+        loadingView.addGradient(UIColor.midBlueColorsSet)
         view.addSubview(loadingView)
     }
     
