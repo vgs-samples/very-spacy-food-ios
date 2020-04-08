@@ -1,4 +1,4 @@
-# Very Spacy Food - VGSCollect iOS SDK showcase application
+# Very Spacy Food - VGS Collect iOS SDK showcase application
 
 
 Very Spacy Food is a food ordering demo application build with **VGSCollectSDK** for secure collecting credit cards data.
