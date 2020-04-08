@@ -31,7 +31,7 @@ Install application pods.
 
 Open Terminal and change working directory to `Very Spacy Food` application folder:
 
-    $ cd /very-spacy-food
+    $ cd very-spacy-food
 
 Install pods:
 
