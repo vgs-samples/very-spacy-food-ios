@@ -17,7 +17,11 @@ Very Spacy Food is a food ordering demo application build with **VGSCollectSDK**
 
 #### Step 1
 
-Go to your <a href="https://dashboard.verygoodsecurity.com/" target="_blank">VGS organization</a> and establish <a href="https://www.verygoodsecurity.com/docs/getting-started/quick-integration#securing-inbound-connection" target="_blank">Inbound connection</a>. 
+Go to your <a href="https://dashboard.verygoodsecurity.com/" target="_blank">VGS organization</a> and establish <a href="https://www.verygoodsecurity.com/docs/getting-started/quick-integration#securing-inbound-connection" target="_blank">Inbound connection</a>. For this demo you can import pre-built Routs configuration:
+-  Inside the app repository find **configuration.yaml** file and download it.
+-  On the <a href="https://dashboard.verygoodsecurity.com/" target="_blank">Dashboard</a> screen go to the **Routs** section and selet **Inbound** Tab. 
+-  At the right corner you will see **Manage** button. Press it and select **Import YAML file**, then choose **configuration.yaml** that you just download and **Save** the Rout.
+-  Now the cards data you send by VGSCollectSDK will be secured.
 
 #### Step 2
 
@@ -92,6 +96,6 @@ Note that usually you shouldn't make payment request to payment provider directl
 ### Useful links
 
 - <a href="https://www.verygoodsecurity.com/docs/vgs-collect/ios-sdk/index" target="_blank">Documentation</a> 
-- <a href="https://github.com/verygoodsecurity/vgs-collect-ios" target="_blank">Repo</a> 
+- <a href="https://verygoodsecurity.github.io/vgs-collect-ios/" target="_blank">VGSCollectSDK API References</a> 
+- <a href="https://github.com/verygoodsecurity/vgs-collect-ios" target="_blank">VGSCollectSDK GitHub Repo</a> 
 - <a href="http://cocoapods.org/pods/VGSCollectSDK" target="_blank">CocoaPods</a> 
-- <a href="TODO" target="_blank">VGSCollectSDK API References</a> 
