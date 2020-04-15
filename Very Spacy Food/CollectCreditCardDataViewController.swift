@@ -25,7 +25,7 @@ struct SecuredCardData {
 }
 
 /// Your organization <vaultId>
-let vaultId = "tnttftgwu66"
+let vaultId = "vaultId"
 
 
 class CollectCreditCardDataViewController: UIViewController {
@@ -213,7 +213,6 @@ class CollectCreditCardDataViewController: UIViewController {
     //MARK: - Submit Data
     /// Send sensetive data to VGS and get alieses.
     @IBAction func save(_ sender: Any) {
-        impactFeedbackGenerator.impactOccurred()
         /// Before sending data to VGS, you should probably want to check if it's valid.
         guard validateInputData() else {
             return
@@ -262,7 +261,7 @@ class CollectCreditCardDataViewController: UIViewController {
                     /// Probably wrong vaultId or internet connection errors...
                     self?.showAlert(title: "Error", text: "Somethin went wrong!")
                 }
-                print(error)
+                print(error ?? "submit error")
             }
         }
     }
