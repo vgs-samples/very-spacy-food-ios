@@ -45,15 +45,11 @@ class CollectCreditCardDataViewController: UIViewController {
     var collector = VGSCollect(id: vaultId, environment: .sandbox)
     
     // VGSCollectSDK UI Elements
+    var cardHolderName = VGSTextField()
     var cardNumber = VGSCardTextField()
     var expCardDate = VGSTextField()
     var cvcCardNum = VGSTextField()
     var scanController: VGSCardIOScanController?
-
-    // Native UI Elements
-    lazy var cardHolderName: CardHolderTextFieldView = {
-        return CardHolderTextFieldView.fromNib()!
-    }()
     
     // Helpers
     var isKeyboardVisible = false
@@ -91,16 +87,22 @@ class CollectCreditCardDataViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        cardHolderName.textField.becomeFirstResponder()
+        cardNumber.becomeFirstResponder()
     }
     
     // MARK: - Arrange Textfields
     private func arrangeTextFields() {
-        cardHolderName.scanButton.addTarget(self, action: #selector(scan), for: .touchUpInside)
         cardDataStackView.addArrangedSubview(cardHolderName)
         cardDataStackView.addArrangedSubview(cardNumber)
+
         
-        let bottomStackView = UIStackView.init(arrangedSubviews: [expCardDate, cvcCardNum, UIView()])
+        let scanButton = UIButton()
+        scanButton.setImage(UIImage(named: "scan_icon.png"), for: .normal)
+        scanButton.imageView?.contentMode = .scaleAspectFit
+        scanButton.imageEdgeInsets = .init(top: 5, left: 10, bottom: 5, right: 10)
+        scanButton.addTarget(self, action: #selector(scan), for: .touchUpInside)
+
+        let bottomStackView = UIStackView.init(arrangedSubviews: [expCardDate, cvcCardNum, scanButton])
         bottomStackView.axis = .horizontal
         bottomStackView.alignment = .fill
         bottomStackView.distribution = .fillEqually
@@ -135,7 +137,7 @@ class CollectCreditCardDataViewController: UIViewController {
         cardNumber.tintColor = tintColor
         cardNumber.font = textFont
         cardNumber.padding = padding
-        cardNumber.attributedPlaceholder = NSAttributedString(string: "Card Number", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
+        cardNumber.attributedPlaceholder = NSAttributedString(string: "4111 1111 1111 1111", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
         cardNumber.textAlignment = .natural
         
         /// Set expiration data field configuration with same collector but specific fieldName
@@ -151,7 +153,7 @@ class CollectCreditCardDataViewController: UIViewController {
         expCardDate.tintColor = tintColor
         expCardDate.font = textFont
         expCardDate.padding = padding
-        expCardDate.attributedPlaceholder = NSAttributedString(string: "MM/YY", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
+        expCardDate.attributedPlaceholder = NSAttributedString(string: "11/22", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
         expCardDate.textAlignment = .center
         
         /// Set cvc data field configuration with same collector but specific fieldName
@@ -159,7 +161,7 @@ class CollectCreditCardDataViewController: UIViewController {
         cvcConfiguration.isRequired = true
         cvcConfiguration.type = .cvc
         cvcConfiguration.keyboardAppearance = .dark
-
+        
         cvcCardNum.configuration = cvcConfiguration
         cvcCardNum.textColor = textColor
         cvcCardNum.tintColor = tintColor
@@ -168,17 +170,17 @@ class CollectCreditCardDataViewController: UIViewController {
         cvcCardNum.attributedPlaceholder = NSAttributedString(string: "CVC", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
         cvcCardNum.textAlignment = .center
 
-        /// VGSCollectSDK has specific field type to collect card holder name.
-        /// But for demo porpose we use native UI elements to compare them with VGSCollectSDK.
-        cardHolderName.layer.borderWidth = 1
-        cardHolderName.layer.borderColor = UIColor.lightGray.cgColor
-        cardHolderName.layer.cornerRadius = 4
+        /// Set cvc data field configuration with same collector but specific fieldName
+        let cardHolderConfiguration = VGSConfiguration(collector: collector, fieldName: "cardholder_name")
+        cardHolderConfiguration.type = .cardHolderName
+        cardHolderConfiguration.keyboardAppearance = .dark
         
-        cardHolderName.textField.autocorrectionType = .no
-        cardHolderName.textField.textColor = textColor
-        cardHolderName.textField.tintColor = tintColor
-        cardHolderName.textField.attributedPlaceholder = NSAttributedString(string: "Cardholder Name", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
-        cardHolderName.textField.font = textFont
+        cardHolderName.configuration = cardHolderConfiguration
+        cardHolderName.textColor = textColor
+        cardHolderName.tintColor = tintColor
+        cardHolderName.font = textFont
+        cardHolderName.padding = padding
+        cardHolderName.attributedPlaceholder = NSAttributedString(string: "Cardholder Name", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
     }
     
     //MARK: - Validation
@@ -211,7 +213,7 @@ class CollectCreditCardDataViewController: UIViewController {
     //MARK: - Submit Data
     /// Send sensetive data to VGS and get alieses.
     @IBAction func save(_ sender: Any) {
-    
+        impactFeedbackGenerator.impactOccurred()
         /// Before sending data to VGS, you should probably want to check if it's valid.
         guard validateInputData() else {
             return
@@ -221,8 +223,11 @@ class CollectCreditCardDataViewController: UIViewController {
         let cardState = cardNumber.state as? CardState
         let bin = cardState?.bin ?? ""
         let last4 = cardState?.last4 ?? ""
-        let brand = cardState?.cardBrand.stringValue() ?? ""
+        let brand = cardState?.cardBrand.stringValue ?? ""
         
+        /// Add any additional data to request
+        let extraData = ["userId": "id12345",
+                         "cardBrand": brand]
         /**
         Send data to VGS
         For this demo app we send data to our echo server.
@@ -236,7 +241,7 @@ class CollectCreditCardDataViewController: UIViewController {
          and Inbound connections: https://www.verygoodsecurity.com/docs/guides/inbound-connection
         */
         
-        collector.submit(path: "/post") { [weak self](json, error) in
+        collector.submit(path: "/post", extraData: extraData) { [weak self](json, error) in
             
             /// Check response. If success, you should get aliases data that you can use later or store on your backend.
             /// If response return raw data - check the Routs configuration  for Inbound requests on Dashboard.
@@ -312,6 +317,7 @@ extension CollectCreditCardDataViewController {
             }
             self.bluredBackground.alpha = 0.8 * initialTouchPoint.y / touchPoint.y
         case .ended, .cancelled:
+            
              if touchPoint.y - initialTouchPoint.y > 100 {
                 self.view.endEditing(true)
 
