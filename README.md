@@ -23,6 +23,11 @@ Go to your <a href="https://dashboard.verygoodsecurity.com/" target="_blank">VGS
 -  At the right corner you will see **Manage** button. Press it and select **Import YAML file**, then choose **configuration.yaml** that you just download and **Save** the Rout.
 -  Now the cards data you send by VGSCollectSDK will be secured.
 
+
+<p align="center">
+<img src="https://github.com/verygoodsecurity/very-spacy-food/blob/master/dashboard_routs.png" width="600">
+</p>
+
 #### Step 2
 
 Clone Very Spacy Food application repository.
