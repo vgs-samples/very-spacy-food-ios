@@ -95,6 +95,7 @@ extension MenuViewController {
         collectCardVC.onCompletion = { [weak self] (cardData) in
             self?.securedCardData = cardData
         }
+        print("TOGGLE DEVICE KEYBOARD IF XCODE DIDN'T!!!")
         self.present(collectCardVC, animated: false, completion: nil)
     }
     

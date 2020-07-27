@@ -47,7 +47,7 @@ class CollectCreditCardDataViewController: UIViewController {
     // VGSCollectSDK UI Elements
     var cardHolderName = VGSTextField()
     var cardNumber = VGSCardTextField()
-    var cardExpDate = VGSTextField()
+    var cardExpDate = VGSExpDateTextField()
     var cardCVCNumber = VGSTextField()
     var scanController: VGSCardIOScanController?
     
@@ -125,7 +125,6 @@ class CollectCreditCardDataViewController: UIViewController {
         
         /// Setup UI attributes
         cardNumber.attributedPlaceholder = NSAttributedString(string: "4111 1111 1111 1111", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
-        cardNumber.textAlignment = .natural
         
         // MARK: - Card Expiration Date Field
         /// Set expiration data field configuration with same collector but specific fieldName
@@ -134,9 +133,12 @@ class CollectCreditCardDataViewController: UIViewController {
         /// Set input .isRequired = true if you need textfield input be not empty or nil.  Then user couldn't send expiration date that is empty or nil. VGSCollect.sendData(_:) will return specific VGSError in that case.
         expDateConfiguration.isRequired = true
         expDateConfiguration.type = .expDate
-        expDateConfiguration.keyboardAppearance = .dark
+        expDateConfiguration.keyboardAppearance = .light
         
         cardExpDate.configuration = expDateConfiguration
+      
+        /// Add keyboard accessory view on top of UIPicker to handle actions
+        cardExpDate.keyboardAccessoryView = makeAccessoryView()
         cardExpDate.attributedPlaceholder = NSAttributedString(string: "11/22", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
         cardExpDate.textAlignment = .center
         
@@ -362,4 +364,32 @@ extension CollectCreditCardDataViewController {
         containerViewBottomConstraint.constant = maxLevel - delta
         view.layoutIfNeeded()
     }
+  
+    func makeAccessoryView() -> UIView {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 44))
+        view.backgroundColor = UIColor(red: 0.03, green: 0.04, blue: 0.09, alpha: 0.5)
+        let doneButton = UIButton(type: .system)
+        doneButton.setTitle("Next", for: .normal)
+        doneButton.setTitleColor(.white, for: .normal)
+        doneButton.addTarget(self, action: #selector(expDateButtonAction), for: .touchUpInside)
+        
+        view.addSubview(doneButton)
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        let views = ["button": doneButton]
+        let h = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=15)-[button]-(15)-|",
+                                               options: .alignAllCenterY,
+                                               metrics: nil,
+                                               views: views)
+        NSLayoutConstraint.activate(h)
+        let v = NSLayoutConstraint.constraints(withVisualFormat: "V:|[button]|",
+                                               options: .alignAllCenterX,
+                                               metrics: nil,
+                                               views: views)
+        NSLayoutConstraint.activate(v)
+        return view
+    }
+  
+  @objc func expDateButtonAction() {
+      self.cardCVCNumber.becomeFirstResponder()
+  }
 }
