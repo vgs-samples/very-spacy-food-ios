@@ -7,8 +7,8 @@ target 'Very Spacy Food' do
 
   # Pods for Very Spacy Food
 
- pod 'VGSCollectSDK', '1.6.0'
- pod 'VGSCollectSDK/CardIO', '1.6.0'
+  pod 'VGSCollectSDK', '1.6.1'
+  pod 'VGSCollectSDK/CardIO', '1.6.1'
 
   target 'Very Spacy FoodTests' do
     inherit! :search_paths
