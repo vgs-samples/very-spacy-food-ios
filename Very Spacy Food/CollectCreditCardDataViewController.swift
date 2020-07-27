@@ -13,7 +13,7 @@ import VGSCollectSDK
 /// An object that store secured card data details
 struct SecuredCardData {
     
-    /// PCI data aliases
+    /// Sensitive data aliases
     let cardNumberAlias: String
     let cvcAlias: String
     let expDataAlias: String
@@ -47,8 +47,8 @@ class CollectCreditCardDataViewController: UIViewController {
     // VGSCollectSDK UI Elements
     var cardHolderName = VGSTextField()
     var cardNumber = VGSCardTextField()
-    var expCardDate = VGSTextField()
-    var cvcCardNum = VGSTextField()
+    var cardExpDate = VGSTextField()
+    var cardCVCNumber = VGSTextField()
     var scanController: VGSCardIOScanController?
     
     // Helpers
@@ -58,9 +58,6 @@ class CollectCreditCardDataViewController: UIViewController {
 
     var onCompletion: ((SecuredCardData) -> Void )?
     
-    // Track VGSTextFields with not valid input on Submit
-    var notValidTextFields = Set<VGSTextField>()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,16 +66,7 @@ class CollectCreditCardDataViewController: UIViewController {
         
         /// Setup UI attributes and configuration
         setupTextFieldConfigurations()
-        
-        /// Observe active vgs textfield's state when editing the field
-        collector.observeFieldState = { (textfield) in
-            if self.notValidTextFields.contains(textfield) {
-                // Update textfield UI
-                self.notValidTextFields.remove(textfield)
-                textfield.layer.borderColor = UIColor.white.cgColor
-            }
-        }
-        
+                
         // Helpers
         addGestureRecognizer()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -102,7 +90,7 @@ class CollectCreditCardDataViewController: UIViewController {
         scanButton.imageEdgeInsets = .init(top: 5, left: 10, bottom: 5, right: 10)
         scanButton.addTarget(self, action: #selector(scan), for: .touchUpInside)
 
-        let bottomStackView = UIStackView.init(arrangedSubviews: [expCardDate, cvcCardNum, scanButton])
+        let bottomStackView = UIStackView.init(arrangedSubviews: [cardExpDate, cardCVCNumber, scanButton])
         bottomStackView.axis = .horizontal
         bottomStackView.alignment = .fill
         bottomStackView.distribution = .fillEqually
@@ -111,95 +99,77 @@ class CollectCreditCardDataViewController: UIViewController {
     }
     
     private func setupTextFieldConfigurations() {
-        let textColor = UIColor.white
-        let tintColor = UIColor.white
-        let placeholderColor = UIColor.init(white: 1, alpha: 0.8)
-        let textFont = UIFont.systemFont(ofSize: 22)
-        let padding = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        
+        let placeholderColor = UIColor(white: 1, alpha: 0.8)
+      
+        // MARK: - Card Number Field
+      
         /// Init card number field configuration with VGSCollect instance.
         let cardConfiguration = VGSConfiguration(collector: collector, fieldName: "card_number")
         
         /// Setup field type. For each specific FieldType  built-in validation, default text format and other specific attributes will be applied.
         cardConfiguration.type = .cardNumber
         
-        /// Set input should be .isRequiredValidOnly = true. Then user couldn't submit card number that is not valid. VGSCollect.submit(_:) will return specific VGSError in that case.
+        /// Set input should be .isRequiredValidOnly = true. Then user couldn't send card number that is not valid. VGSCollect.sendData(_:) will return specific VGSError in that case.
         cardConfiguration.isRequiredValidOnly = true
         
         /// Set preffered keyboard color
         cardConfiguration.keyboardAppearance = .dark
+      
+        /// Enable unknown card brands validation with Luhn algorithm
+        cardConfiguration.validationRules = VGSValidationRuleSet(rules: [
+          VGSValidationRulePaymentCard.init(error: VGSValidationErrorType.cardNumber.rawValue, validateUnknownCardBrand: true)
+        ])
         
         /// Set configuration instance to textfield that will collect card number
         cardNumber.configuration = cardConfiguration
         
         /// Setup UI attributes
-        cardNumber.textColor = textColor
-        cardNumber.tintColor = tintColor
-        cardNumber.font = textFont
-        cardNumber.padding = padding
         cardNumber.attributedPlaceholder = NSAttributedString(string: "4111 1111 1111 1111", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
         cardNumber.textAlignment = .natural
         
+        // MARK: - Card Expiration Date Field
         /// Set expiration data field configuration with same collector but specific fieldName
         let expDateConfiguration = VGSConfiguration(collector: collector, fieldName: "card_expirationDate")
         
-        /// Set input .isRequired = true if you need textfield input be not empty or nil.  Then user couldn't submit expiration date that is empty or nil. VGSCollect.submit(_:) will return specific VGSError in that case.
+        /// Set input .isRequired = true if you need textfield input be not empty or nil.  Then user couldn't send expiration date that is empty or nil. VGSCollect.sendData(_:) will return specific VGSError in that case.
         expDateConfiguration.isRequired = true
         expDateConfiguration.type = .expDate
         expDateConfiguration.keyboardAppearance = .dark
         
-        expCardDate.configuration = expDateConfiguration
-        expCardDate.textColor = textColor
-        expCardDate.tintColor = tintColor
-        expCardDate.font = textFont
-        expCardDate.padding = padding
-        expCardDate.attributedPlaceholder = NSAttributedString(string: "11/22", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
-        expCardDate.textAlignment = .center
+        cardExpDate.configuration = expDateConfiguration
+        cardExpDate.attributedPlaceholder = NSAttributedString(string: "11/22", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
+        cardExpDate.textAlignment = .center
         
+        // MARK: - Card CVC Field
         /// Set cvc data field configuration with same collector but specific fieldName
         let cvcConfiguration = VGSConfiguration(collector: collector, fieldName: "card_cvc")
         cvcConfiguration.isRequired = true
         cvcConfiguration.type = .cvc
         cvcConfiguration.keyboardAppearance = .dark
         
-        cvcCardNum.configuration = cvcConfiguration
-        cvcCardNum.textColor = textColor
-        cvcCardNum.tintColor = tintColor
-        cvcCardNum.font = textFont
-        cvcCardNum.padding = padding
-        cvcCardNum.attributedPlaceholder = NSAttributedString(string: "CVC", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
-        cvcCardNum.textAlignment = .center
+        cardCVCNumber.configuration = cvcConfiguration
+        cardCVCNumber.isSecureTextEntry = true
+        cardCVCNumber.attributedPlaceholder = NSAttributedString(string: "CVC", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
+        cardCVCNumber.textAlignment = .center
 
+        // MARK: - Card Holder Name Field
         /// Set cvc data field configuration with same collector but specific fieldName
         let cardHolderConfiguration = VGSConfiguration(collector: collector, fieldName: "cardholder_name")
         cardHolderConfiguration.type = .cardHolderName
         cardHolderConfiguration.keyboardAppearance = .dark
         
         cardHolderName.configuration = cardHolderConfiguration
-        cardHolderName.textColor = textColor
-        cardHolderName.tintColor = tintColor
-        cardHolderName.font = textFont
-        cardHolderName.padding = padding
         cardHolderName.attributedPlaceholder = NSAttributedString(string: "Cardholder Name", attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
-    }
-    
-    //MARK: - Validation
-    /// Check if VGSTextFields are valid and update UI for fields with errors.
-    func validateInputData() -> Bool {
-        notValidTextFields.removeAll()
-        if !cardNumber.state.isValid {
-            cardNumber.layer.borderColor = UIColor.red.cgColor
-            notValidTextFields.insert(cardNumber)
-        }
-        if !expCardDate.state.isValid {
-            expCardDate.layer.borderColor = UIColor.red.cgColor
-            notValidTextFields.insert(expCardDate)
-        }
-        if !cvcCardNum.state.isValid {
-            cvcCardNum.layer.borderColor = UIColor.red.cgColor
-            notValidTextFields.insert(cvcCardNum)
-        }
-        return notValidTextFields.count == 0
+      
+      
+        // MARK: - Set Fields UI attributes
+        collector.textFields.forEach({
+          $0.textColor = .white
+          $0.tintColor = .white
+          $0.font = UIFont.systemFont(ofSize: 22)
+          $0.padding = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+          $0.delegate = self
+        })
     }
     
     //MARK: - Card Scan
@@ -210,12 +180,18 @@ class CollectCreditCardDataViewController: UIViewController {
         scanController?.presentCardScanner(on: self, animated: true, completion: nil)
     }
     
-    //MARK: - Submit Data
+    //MARK: - Send Data
     /// Send sensetive data to VGS and get alieses.
     @IBAction func save(_ sender: Any) {
         /// Before sending data to VGS, you should probably want to check if it's valid.
-        guard validateInputData() else {
-            return
+       
+        let notValidFields = collector.textFields.filter({ $0.state.isValid == false })
+        if notValidFields.count > 0 {
+          notValidFields.forEach({
+            $0.borderColor = .red
+            print($0.state.validationErrors)
+          })
+          return
         }
         
         /// Also you can grab not sensetive data form CardState attribures
@@ -225,7 +201,7 @@ class CollectCreditCardDataViewController: UIViewController {
         let brand = cardState?.cardBrand.stringValue ?? ""
         
         /// Add any additional data to request
-        let extraData = ["userId": "id12345",
+        let extraData = ["customData": "customValue",
                          "cardBrand": brand]
         /**
         Send data to VGS
@@ -234,37 +210,61 @@ class CollectCreditCardDataViewController: UIViewController {
         When the data reach VGS Inpound proxy, fields with sensitive data will be redacted to aliases, which you can store and use securely later.
         Our echo server will return response with same body structure as you send, but fields will have aliases as values instead of original data.
 
-        However in your production app on submit(_:) request, the data will go through VGS Inpound proxy to your backend or any other url that you configure in your Organization vault. It's your backend responsibility to setup response structure.
+        However in your production app on sendData(_:) request, the data will go through VGS Inpound proxy to your backend or any other url that you configure in your Organization vault. It's your backend responsibility to setup response structure.
          
          Check our Documentation to know more about Sending data to VGS: https://www.verygoodsecurity.com/docs/vgs-collect/ios-sdk/submit-data ,
          and Inbound connections: https://www.verygoodsecurity.com/docs/guides/inbound-connection
         */
         
-        collector.submit(path: "/post", extraData: extraData) { [weak self](json, error) in
+      collector.sendData(path: "/post", extraData: extraData, completion: { [weak self](result) in
+        /// Check response. If success, you should get aliases data that you can use later or store on your backend.
+        /// If you see raw(not tokenized)  data in response  - check the Routs configuration  for Inbound requests on Dashboard.
+        switch result {
+          case .success(let code, let data, _):
+            print("Success: \(code)")
             
-            /// Check response. If success, you should get aliases data that you can use later or store on your backend.
-            /// If response return raw data - check the Routs configuration  for Inbound requests on Dashboard.
-            if let data = json?["json"] as? [String: Any],
-                let cardNumberAlias = data["card_number"] as? String,
-                let cvcAlias = data["card_cvc"]  as? String,
-                let expDataAlias = data["card_expirationDate"]  as? String  {
-                
-                let cardData = SecuredCardData(cardNumberAlias: cardNumberAlias, cvcAlias: cvcAlias, expDataAlias: expDataAlias, cardNumberBin: bin, cardNumberLast4: last4, cardBrand: brand)
-                self?.onCompletion?(cardData)
-                self?.dismiss(animated: false, completion: nil)
-            } else {
-                /// If data is not valid, VGSCollect can return VGSError
-                if let error = error as? VGSError, error.type == VGSErrorType.inputDataIsNotValid {
-                    print(error.description)
-                    self?.showAlert(title: "Ooops!", text: "Seems your data is not valid...")
-                } else {
-                    /// Probably wrong vaultId or internet connection errors...
-                    self?.showAlert(title: "Error", text: "Somethin went wrong!")
-                }
-                print(error ?? "submit error")
+            /// Parse response from echo server
+            guard let data = data,
+              let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+              let cardDataDict = jsonData["json"] as? [String: Any],
+              let cardNumberAlias = cardDataDict["card_number"] as? String,
+              let cvcAlias = cardDataDict["card_cvc"]  as? String,
+              let expDataAlias = cardDataDict["card_expirationDate"]  as? String  else {
+                  self?.showAlert(title: "Error", text: "Somethin went wrong!")
+                  return
             }
+            
+            let cardData = SecuredCardData(cardNumberAlias: cardNumberAlias, cvcAlias: cvcAlias, expDataAlias: expDataAlias, cardNumberBin: bin, cardNumberLast4: last4, cardBrand: brand)
+            self?.onCompletion?(cardData)
+            self?.dismiss(animated: false, completion: nil)
+            
+          case .failure(let code, _, _, let error):
+            switch code {
+            case 400..<499:
+              // Wrong request. This also can happend when your Routs not setup yet or your <vaultId> is wrong
+              self?.showAlert(title: "Error - \(code)", text: "Wrong request!")
+            case VGSErrorType.inputDataIsNotValid.rawValue:
+              if let error = error as? VGSError {
+                self?.showAlert(title: "Error - \(code)", text:  "Input data is not valid. Details:\n \(error)")
+              }
+            default:
+              self?.showAlert(title: "Error - \(code)", text: "Somethin went wrong!")
+            }
+            print("Failure: \(code)")
         }
-    }
+      })
+  }
+}
+
+// MARK: - VGSTextFieldDelegate
+/// Handle VGSTextField Delegate funtions
+extension CollectCreditCardDataViewController: VGSTextFieldDelegate {
+  
+  /// Check active vgs textfield's state when editing the field
+  func vgsTextFieldDidChange(_ textField: VGSTextField) {
+    textField.borderColor = .white
+    print(textField.state.description)
+  }
 }
 
 // MARK: - VGSCardIOScanControllerDelegate
@@ -277,9 +277,9 @@ extension CollectCreditCardDataViewController: VGSCardIOScanControllerDelegate {
         case .cardNumber:
             return cardNumber
         case .expirationDate:
-            return expCardDate
+            return cardExpDate
         case .cvc:
-            return cvcCardNum
+            return cardCVCNumber
         default:
             return nil
         }
