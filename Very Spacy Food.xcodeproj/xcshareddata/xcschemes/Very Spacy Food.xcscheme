@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3258CB7C24D2DAB200C0CC8D"
+               BuildableName = "Very Very Spacy FoodUITests.xctest"
+               BlueprintName = "Very Very Spacy FoodUITests"
+               ReferencedContainer = "container:Very Spacy Food.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
