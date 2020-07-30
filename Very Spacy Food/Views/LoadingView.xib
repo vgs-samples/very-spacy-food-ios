@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Ht9-iD-Xbo" customClass="LoadingView" customModule="Very_Very_Spacy_Food" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="milkyway" translatesAutoresizingMaskIntoConstraints="NO" id="O6S-78-DkT">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="saturn_1" translatesAutoresizingMaskIntoConstraints="NO" id="y4r-76-fTH">
+                    <rect key="frame" x="148" y="389" width="118" height="118"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="y4r-76-fTH" secondAttribute="height" id="8H2-Jt-8XB"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Re3-Di-gtp">
+                    <rect key="frame" x="0.0" y="238" width="414" height="85"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="72"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="y4r-76-fTH" firstAttribute="width" secondItem="O6S-78-DkT" secondAttribute="width" multiplier="1:3.5" id="3kV-W7-ZZG"/>
+                <constraint firstItem="Kls-UK-bKv" firstAttribute="trailing" secondItem="O6S-78-DkT" secondAttribute="trailing" id="4I6-XZ-Cbt"/>
+                <constraint firstItem="Re3-Di-gtp" firstAttribute="leading" secondItem="Kls-UK-bKv" secondAttribute="leading" id="AiG-Un-Uu5"/>
+                <constraint firstItem="Kls-UK-bKv" firstAttribute="trailing" secondItem="Re3-Di-gtp" secondAttribute="trailing" id="FL7-S0-cCD"/>
+                <constraint firstItem="y4r-76-fTH" firstAttribute="centerY" secondItem="Ht9-iD-Xbo" secondAttribute="centerY" id="Qed-tb-81A"/>
+                <constraint firstItem="O6S-78-DkT" firstAttribute="top" secondItem="Ht9-iD-Xbo" secondAttribute="top" id="YMn-7d-cOw"/>
+                <constraint firstItem="O6S-78-DkT" firstAttribute="leading" secondItem="Kls-UK-bKv" secondAttribute="leading" id="kBt-0h-DUZ"/>
+                <constraint firstAttribute="bottom" secondItem="O6S-78-DkT" secondAttribute="bottom" id="ksY-Yh-4dO"/>
+                <constraint firstItem="y4r-76-fTH" firstAttribute="top" secondItem="Re3-Di-gtp" secondAttribute="bottom" constant="66" id="nc2-9E-zgS"/>
+                <constraint firstItem="y4r-76-fTH" firstAttribute="centerX" secondItem="Ht9-iD-Xbo" secondAttribute="centerX" id="uAQ-oX-R72"/>
+                <constraint firstItem="Re3-Di-gtp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Kls-UK-bKv" secondAttribute="top" constant="2" id="vjV-bL-8h2"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Kls-UK-bKv"/>
+            <connections>
+                <outlet property="imageView" destination="y4r-76-fTH" id="DHy-5V-yfc"/>
+            </connections>
+            <point key="canvasLocation" x="293" y="21"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="milkyway" width="375" height="796"/>
+        <image name="saturn_1" width="249" height="240"/>
+    </resources>
+</document>

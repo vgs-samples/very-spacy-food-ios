@@ -1,0 +1,150 @@
+data:
+  - attributes:
+      created_at: '2020-03-13T11:41:03'
+      destination_override_endpoint: 'https://echo.apps.verygood.systems'
+      entries:
+        - classifiers: {}
+          config:
+            condition: AND
+            expression: null
+            rules:
+              - condition: null
+                expression:
+                  field: PathInfo
+                  operator: equals
+                  type: string
+                  values:
+                    - /post
+                rules: null
+              - condition: null
+                expression:
+                  field: ContentType
+                  operator: equals
+                  type: string
+                  values:
+                    - application/json
+                rules: null
+          id: 11d7e3a4-ba50-451c-b9f0-379cefadb772
+          id_selector: null
+          operation: REDACT
+          operations: null
+          phase: REQUEST
+          public_token_generator: UUID
+          targets:
+            - body
+          token_manager: PERSISTENT
+          transformer: JSON_PATH
+          transformer_config:
+            - $.card_expirationDate
+          transformer_config_map: null
+        - classifiers: {}
+          config:
+            condition: AND
+            expression: null
+            rules:
+              - condition: null
+                expression:
+                  field: PathInfo
+                  operator: equals
+                  type: string
+                  values:
+                    - /post
+                rules: null
+              - condition: null
+                expression:
+                  field: ContentType
+                  operator: equals
+                  type: string
+                  values:
+                    - application/json
+                rules: null
+          id: 6f062fa4-1d85-46c9-a643-a16875208064
+          id_selector: null
+          operation: REDACT
+          operations: null
+          phase: REQUEST
+          public_token_generator: UUID
+          targets:
+            - body
+          token_manager: VOLATILE
+          transformer: JSON_PATH
+          transformer_config:
+            - $.card_cvc
+          transformer_config_map: null
+        - classifiers: {}
+          config:
+            condition: AND
+            expression: null
+            rules:
+              - condition: null
+                expression:
+                  field: PathInfo
+                  operator: equals
+                  type: string
+                  values:
+                    - /post
+                rules: null
+              - condition: null
+                expression:
+                  field: ContentType
+                  operator: equals
+                  type: string
+                  values:
+                    - application/json
+                rules: null
+          id: 48b9aab5-bdbe-456d-84ae-43f468293cf4
+          id_selector: null
+          operation: REDACT
+          operations: null
+          phase: REQUEST
+          public_token_generator: UUID
+          targets:
+            - body
+          token_manager: PERSISTENT
+          transformer: JSON_PATH
+          transformer_config:
+            - $.card_number
+          transformer_config_map: null
+        - classifiers: {}
+          config:
+            condition: AND
+            rules:
+              - condition: null
+                expression:
+                  field: PathInfo
+                  operator: equals
+                  type: string
+                  values:
+                    - /post
+              - condition: null
+                expression:
+                  field: ContentType
+                  operator: equals
+                  type: string
+                  values:
+                    - application/json
+          id: 2458b33b-6959-40ab-9df1-1d96b7b8c1e3
+          id_selector: null
+          operation: REDACT
+          operations: null
+          phase: REQUEST
+          public_token_generator: UUID
+          targets:
+            - body
+          token_manager: PERSISTENT
+          transformer: JSON_PATH
+          transformer_config:
+            - $.cardholder_name
+          transformer_config_map: null
+      host_endpoint: (.*)\.verygoodproxy\.com
+      id: 90e8498a-f27c-46f3-82f6-266c65cdb1cb
+      ordinal: null
+      port: 80
+      protocol: http
+      source_endpoint: '*'
+      tags:
+        name: echo.apps.verygood.systems-deep-pink-mechanic
+      updated_at: '2020-04-15T14:55:09'
+    id: 90e8498a-f27c-46f3-82f6-266c65cdb1cb
+    type: rule_chain
+version: 1
