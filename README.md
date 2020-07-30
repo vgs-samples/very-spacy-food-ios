@@ -1,6 +1,4 @@
 
-[![CircleCI](https://circleci.com/gh/vgs-samples/very-spacy-food/tree/master.svg?style=svg&circle-token=cc7c223b2f1804c307d616057488031e461523a8)](https://circleci.com/gh/vgs-samples/very-spacy-food/tree/master)
-
 # Very Spacy Food <br/> VGS Collect iOS SDK Showcase Application 
 
 
