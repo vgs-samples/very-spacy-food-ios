@@ -5,7 +5,7 @@
 Very Spacy Food is a food ordering demo application build with [VGSCollectSDK](https://github.com/verygoodsecurity/vgs-collect-ios) for secure collecting credit cards data.
 
 <p align="center">
-<img src="https://github.com/verygoodsecurity/very-spacy-food/blob/master/app_order_screen.png" width="200">    <img src="https://github.com/verygoodsecurity/very-spacy-food/blob/master/app_collect_card_data_screen.png" width="200">    <img src="https://github.com/verygoodsecurity/very-spacy-food/blob/master/app_confirmation_screen.png" width="200">
+<img src="app_order_screen.png" width="200">    <img src="app_collect_card_data_screen.png" width="200">    <img src="app_confirmation_screen.png" width="200">
 </p>
 
 ## How to run it?
@@ -21,7 +21,7 @@ Very Spacy Food is a food ordering demo application build with [VGSCollectSDK](h
 Go to your <a href="https://dashboard.verygoodsecurity.com/" target="_blank">VGS organization</a> and establish <a href="https://www.verygoodsecurity.com/docs/getting-started/quick-integration#securing-inbound-connection" target="_blank">Inbound connection</a>. For this demo you can import pre-built Routs configuration:
 
 <p align="center">
-<img src="https://github.com/verygoodsecurity/very-spacy-food/blob/master/dashboard_routs.png" width="600">
+<img src="dashboard_routs.png" width="600">
 </p>
 
 -  Inside the app repository find **configuration.yaml** file and download it.
