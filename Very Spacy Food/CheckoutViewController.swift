@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-let bakendUrl = "https://lu38a8wiw3.execute-api.us-west-2.amazonaws.com/demo-payment-processor"
+/// Your ngrok server <PUBLIC URL>
+let bakendUrl = "https://4be77ff9770b.ngrok.io"
 
 /// A class responsible for handling payment requests.
 class CheckoutViewController: UIViewController {
@@ -19,6 +20,9 @@ class CheckoutViewController: UIViewController {
     @IBOutlet weak var cardNumberLabel: UILabel!
 
     var orderPrice: Double = 0
+    var priceInCents: Int {
+      return Int(orderPrice) * 100
+    }
     var securedCardData: SecuredCardData!
     lazy var loadingView: LoadingView = {
         return LoadingView.fromNib()!
@@ -57,18 +61,22 @@ class CheckoutViewController: UIViewController {
     @IBAction func payAction(_ sender: Any) {
         setLoadingView(hidden: false)
         
-        var request = URLRequest(url: URL(string: bakendUrl)!)
+        let jsonData = try? JSONSerialization.data(withJSONObject: ["userId": userId,
+                                                                    "amount": priceInCents])
+        let paymentUrl = URL(string: bakendUrl)!.appendingPathComponent("payments/stripe")
+      
+        var request = URLRequest(url: paymentUrl)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        request.httpBody = jsonData
+        
         URLSession.shared.dataTask(with: request, completionHandler: { [weak self](data: Data?, response: URLResponse?, error: Error?) in
             
+          DispatchQueue.main.async { [weak self] in
             if error == nil, let httpResponse = response as? HTTPURLResponse  {
                 if (200..<300).contains(httpResponse.statusCode) {
                     print("success")
-                    DispatchQueue.main.async {
-                        self?.showConfirmationScreen()
-                    }
+                    self?.showConfirmationScreen()
                     return
                 } else {
                     self?.showAlert(title: "Oooops!", text: error?.localizedDescription)
@@ -77,6 +85,7 @@ class CheckoutViewController: UIViewController {
                 self?.showAlert(title: "Request error!", text: "Something went wrong")
             }
             self?.setLoadingView(hidden: true)
+          }
         }).resume()
     }
     

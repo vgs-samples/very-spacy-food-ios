@@ -10,14 +10,10 @@ import Foundation
 import UIKit
 import VGSCollectSDK
 
-/// An object that store secured card data details
+
+/// An object that store NOT sensitive card data details
 struct SecuredCardData {
-    
-    /// Sensitive data aliases
-    let cardNumberAlias: String
-    let cvcAlias: String
-    let expDataAlias: String
-    
+
     /// Available Card number details that you can reuse in the app
     var cardNumberBin: String = ""
     var cardNumberLast4: String = ""
@@ -25,7 +21,10 @@ struct SecuredCardData {
 }
 
 /// Your organization <vaultId>
-let vaultId = "vaultId"
+let vaultId = "tntwv32wvon"
+
+/// Random userId
+let userId = UUID().uuidString
 
 
 class CollectCreditCardDataViewController: UIViewController {
@@ -128,7 +127,7 @@ class CollectCreditCardDataViewController: UIViewController {
         
         // MARK: - Card Expiration Date Field
         /// Set expiration data field configuration with same collector but specific fieldName
-        let expDateConfiguration = VGSConfiguration(collector: collector, fieldName: "card_expirationDate")
+        let expDateConfiguration = VGSConfiguration(collector: collector, fieldName: "card_expiration_date")
         
         /// Set input .isRequired = true if you need textfield input be not empty or nil.  Then user couldn't send expiration date that is empty or nil. VGSCollect.sendData(_:) will return specific VGSError in that case.
         expDateConfiguration.isRequired = true
@@ -156,7 +155,7 @@ class CollectCreditCardDataViewController: UIViewController {
 
         // MARK: - Card Holder Name Field
         /// Set cvc data field configuration with same collector but specific fieldName
-        let cardHolderConfiguration = VGSConfiguration(collector: collector, fieldName: "cardholder_name")
+        let cardHolderConfiguration = VGSConfiguration(collector: collector, fieldName: "card_name")
         cardHolderConfiguration.type = .cardHolderName
         cardHolderConfiguration.keyboardAppearance = .dark
         
@@ -203,8 +202,7 @@ class CollectCreditCardDataViewController: UIViewController {
         let brand = cardState?.cardBrand.stringValue ?? ""
         
         /// Add any additional data to request
-        let extraData = ["customData": "customValue",
-                         "cardBrand": brand]
+        let extraData = ["userId": userId]
         /**
         Send data to VGS
         For this demo app we send data to our echo server.
@@ -218,25 +216,14 @@ class CollectCreditCardDataViewController: UIViewController {
          and Inbound connections: https://www.verygoodsecurity.com/docs/guides/inbound-connection
         */
         
-      collector.sendData(path: "/post", extraData: extraData, completion: { [weak self](result) in
+      collector.sendData(path: "/cards/new", extraData: extraData, completion: { [weak self](result) in
         /// Check response. If success, you should get aliases data that you can use later or store on your backend.
         /// If you see raw(not tokenized)  data in response  - check the Routs configuration  for Inbound requests on Dashboard.
         switch result {
-          case .success(let code, let data, _):
+          case .success(let code, _, _):
             print("Success: \(code)")
-            
-            /// Parse response from echo server
-            guard let data = data,
-              let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-              let cardDataDict = jsonData["json"] as? [String: Any],
-              let cardNumberAlias = cardDataDict["card_number"] as? String,
-              let cvcAlias = cardDataDict["card_cvc"]  as? String,
-              let expDataAlias = cardDataDict["card_expirationDate"]  as? String  else {
-                  self?.showAlert(title: "Error", text: "Somethin went wrong!")
-                  return
-            }
-            
-            let cardData = SecuredCardData(cardNumberAlias: cardNumberAlias, cvcAlias: cvcAlias, expDataAlias: expDataAlias, cardNumberBin: bin, cardNumberLast4: last4, cardBrand: brand)
+
+            let cardData = SecuredCardData(cardNumberBin: bin, cardNumberLast4: last4, cardBrand: brand)
             self?.onCompletion?(cardData)
             self?.dismiss(animated: false, completion: nil)
             
