@@ -204,7 +204,7 @@
 				3213002124193DB50062FEF0 /* Sources */,
 				3213002224193DB50062FEF0 /* Frameworks */,
 				3213002324193DB50062FEF0 /* Resources */,
-				D66B3A63B06ED21EB05B1F69 /* [CP] Embed Pods Frameworks */,
+				857539B5D8FF3AA9E105C874 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -324,7 +324,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D66B3A63B06ED21EB05B1F69 /* [CP] Embed Pods Frameworks */ = {
+		857539B5D8FF3AA9E105C874 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -576,7 +576,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 4445Y664U5;
 				INFOPLIST_FILE = "Very Spacy Food/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -599,7 +599,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 4445Y664U5;
 				INFOPLIST_FILE = "Very Spacy Food/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

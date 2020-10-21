@@ -49,7 +49,7 @@ class CollectCreditCardDataViewController: UIViewController {
     var cardNumber = VGSCardTextField()
     var cardExpDate = VGSExpDateTextField()
     var cardCVCNumber = VGSTextField()
-    var scanController: VGSCardIOScanController?
+    var scanController: VGSCardScanController?
     
     // Helpers
     var isKeyboardVisible = false
@@ -66,8 +66,10 @@ class CollectCreditCardDataViewController: UIViewController {
         
         /// Setup UI attributes and configuration
         setupTextFieldConfigurations()
-                
-        // Helpers
+        
+      /// Update and edit payment card brands
+        updatePaymentCardBrands()
+      
         addGestureRecognizer()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         cardFieldsContainerView.addGradient(UIColor.lightBlueColorsSet)
@@ -172,13 +174,32 @@ class CollectCreditCardDataViewController: UIViewController {
           $0.padding = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
           $0.delegate = self
         })
+      
+       
+    }
+  
+    /// Update and edit card brands. NOTE: this can be done once in AppDelegate
+    func updatePaymentCardBrands() {
+      
+      /// Edit default card brand validation rules
+      VGSPaymentCards.visa.cardNumberLengths = [16]
+      VGSPaymentCards.visa.formatPattern = "#### #### #### ####"
+    
+      /// Add custom brand - Spacy Master. Test with "911 11111111 1111" number.
+      let customCardBrandModel = VGSCustomPaymentCardModel(name: "Spacy Master",
+                                                           regex: "^91\\d*$",
+                                                           formatPattern: "### ######## ####",
+                                                           cardNumberLengths: [15],
+                                                           cvcLengths: [3, 4],
+                                                           checkSumAlgorithm: .luhn,
+                                                           brandIcon: UIImage(named: "spacy_master"))
+      VGSPaymentCards.cutomPaymentCardModels.append(customCardBrandModel)
     }
     
     //MARK: - Card Scan
     @objc func scan() {
         /// Init and present card.io scanner. If scanned data is valid it will be set automatically  into VGSTextFields, you should implement VGSCardIOScanControllerDelegate for this.
-        scanController = VGSCardIOScanController()
-        scanController?.delegate = self
+        scanController = VGSCardScanController(apiKey: "YOUR_API_KET", delegate: self)
         scanController?.presentCardScanner(on: self, animated: true, completion: nil)
     }
     
@@ -271,17 +292,17 @@ extension CollectCreditCardDataViewController: VGSTextFieldDelegate {
 
 // MARK: - VGSCardIOScanControllerDelegate
 /// Handle Card Scanning Delegate
-extension CollectCreditCardDataViewController: VGSCardIOScanControllerDelegate {
+extension CollectCreditCardDataViewController: VGSCardScanControllerDelegate {
     
     /// Set in which VGSTextField scanned data with type should be set. Called after user select Done button, just before userDidFinishScan() delegate.
-    func textFieldForScannedData(type: CradIODataType) -> VGSTextField? {
+    func textFieldForScannedData(type: CradScanDataType) -> VGSTextField? {
         switch type {
         case .cardNumber:
             return cardNumber
         case .expirationDate:
             return cardExpDate
-        case .cvc:
-            return cardCVCNumber
+        case .name:
+            return cardHolderName
         default:
             return nil
         }
@@ -294,7 +315,9 @@ extension CollectCreditCardDataViewController: VGSCardIOScanControllerDelegate {
     
     /// Handle  Done button action on Card.io screen
     func userDidFinishScan() {
-        scanController?.dismissCardScanner(animated: true, completion: nil)
+      scanController?.dismissCardScanner(animated: true, completion: { [weak self] in
+        self?.cardCVCNumber.becomeFirstResponder()
+      })
     }
 }
 

@@ -51,20 +51,11 @@ class Very_Very_Spacy_FoodUITests: XCTestCase {
       cvcTextField.typeText("1234")
       
       app.buttons["scan icon"].tap()
-      let cardIOCardNumber = app.tables.textFields["Card Number"]
-      let cardIOExpDate = app.tables.textFields["MM / YY"]
-      let cardIOCVC = app.tables.textFields["CVV"]
-
-      cardIOCardNumber.tap()
-      cardIOCardNumber.typeText("4111111111111111")
-      
-      cardIOExpDate.tap()
-      cardIOExpDate.typeText("0130")
-      
-      cardIOCVC.tap()
-      cardIOCVC.typeText("123")
-      
-      app.navigationBars["Card"].buttons["Done"].tap()
+      let popup = app.alerts["“Very Spacy Food” Would Like to Access the Camera"]
+      if popup.exists {
+        popup.buttons["OK"].tap()
+      }
+      app.buttons["Back"].tap()
       
       app.buttons["Save"].tap()
     }

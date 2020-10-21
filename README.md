@@ -76,8 +76,13 @@ You can use test credit card data to make the order, e.x.:
 /// Cardholder Name 
 Joe Business
 
-/// Card Number   
+/// Visa Test Card Number   
 4111111111111111
+
+or
+
+/// Custom Brand Card Number
+911 11111111 1111
 
 /// Exp. Date  
 11/22
