@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import VGSCollectSDK
+import VGSCardIOCollector
 
 /// An object that store secured card data details
 struct SecuredCardData {
@@ -49,7 +50,7 @@ class CollectCreditCardDataViewController: UIViewController {
     var cardNumber = VGSCardTextField()
     var cardExpDate = VGSExpDateTextField()
     var cardCVCNumber = VGSTextField()
-    var scanController: VGSCardScanController?
+    var scanController: VGSCardIOScanController?
     
     // Helpers
     var isKeyboardVisible = false
@@ -199,7 +200,7 @@ class CollectCreditCardDataViewController: UIViewController {
     //MARK: - Card Scan
     @objc func scan() {
         /// Init and present card.io scanner. If scanned data is valid it will be set automatically  into VGSTextFields, you should implement VGSCardIOScanControllerDelegate for this.
-        scanController = VGSCardScanController(apiKey: "YOUR_API_KET", delegate: self)
+        scanController = VGSCardIOScanController(self)
         scanController?.presentCardScanner(on: self, animated: true, completion: nil)
     }
     
@@ -292,17 +293,15 @@ extension CollectCreditCardDataViewController: VGSTextFieldDelegate {
 
 // MARK: - VGSCardIOScanControllerDelegate
 /// Handle Card Scanning Delegate
-extension CollectCreditCardDataViewController: VGSCardScanControllerDelegate {
+extension CollectCreditCardDataViewController: VGSCardIOScanControllerDelegate {
     
     /// Set in which VGSTextField scanned data with type should be set. Called after user select Done button, just before userDidFinishScan() delegate.
-    func textFieldForScannedData(type: CradScanDataType) -> VGSTextField? {
+    func textFieldForScannedData(type: CradIODataType) -> VGSTextField? {
         switch type {
         case .cardNumber:
             return cardNumber
         case .expirationDate:
             return cardExpDate
-        case .name:
-            return cardHolderName
         default:
             return nil
         }
