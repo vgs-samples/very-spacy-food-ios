@@ -22,6 +22,12 @@
 		327F8E8924227A0200112868 /* CollectCreditCardDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327F8E8824227A0200112868 /* CollectCreditCardDataViewController.swift */; };
 		327F8E8F2423BE6A00112868 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327F8E8E2423BE6A00112868 /* CheckoutViewController.swift */; };
 		32AAAC4A24212C4200A68317 /* MenuItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AAAC4924212C4200A68317 /* MenuItemDetailsViewController.swift */; };
+		445C124626F4762200D6F3DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C124526F4762200D6F3DD /* AppDelegate.swift */; };
+		445C124A26F4762200D6F3DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C124926F4762200D6F3DD /* ViewController.swift */; };
+		445C124D26F4762200D6F3DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 445C124B26F4762200D6F3DD /* Main.storyboard */; };
+		445C124F26F4762400D6F3DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 445C124E26F4762400D6F3DD /* Assets.xcassets */; };
+		445C125226F4762400D6F3DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 445C125026F4762400D6F3DD /* LaunchScreen.storyboard */; };
+		445C125726F4762400D6F3DD /* VerySpacyFoodAppClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 445C124326F4762200D6F3DD /* VerySpacyFoodAppClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		64CE6254F6513F355B61D4B4 /* Pods_Very_Spacy_FoodTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4B91C61C528B7304EA1CB2 /* Pods_Very_Spacy_FoodTests.framework */; };
 		843B166D58FA4165D5E865E5 /* Pods_Very_Spacy_Food.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9FAA78C2EE779D8F28BCF0 /* Pods_Very_Spacy_Food.framework */; };
 /* End PBXBuildFile section */
@@ -41,7 +47,28 @@
 			remoteGlobalIDString = 3213002424193DB50062FEF0;
 			remoteInfo = "Very Spacy Food";
 		};
+		445C125526F4762400D6F3DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3213001D24193DB50062FEF0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 445C124226F4762200D6F3DD;
+			remoteInfo = VerySpacyFoodAppClip;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		445C125826F4762400D6F3DD /* Embed App Clips */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
+			dstSubfolderSpec = 16;
+			files = (
+				445C125726F4762400D6F3DD /* VerySpacyFoodAppClip.app in Embed App Clips */,
+			);
+			name = "Embed App Clips";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3213002524193DB50062FEF0 /* Very Very Spacy Food.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Very Very Spacy Food.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +93,14 @@
 		327F8E8E2423BE6A00112868 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		32AAAC4924212C4200A68317 /* MenuItemDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemDetailsViewController.swift; sourceTree = "<group>"; };
 		3D4F9079FDCEB1FBDBF3B157 /* Pods-Spacy Food.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spacy Food.debug.xcconfig"; path = "Target Support Files/Pods-Spacy Food/Pods-Spacy Food.debug.xcconfig"; sourceTree = "<group>"; };
+		445C124326F4762200D6F3DD /* VerySpacyFoodAppClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VerySpacyFoodAppClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		445C124526F4762200D6F3DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		445C124926F4762200D6F3DD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		445C124C26F4762200D6F3DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		445C124E26F4762400D6F3DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		445C125126F4762400D6F3DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		445C125326F4762400D6F3DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		445C125426F4762400D6F3DD /* VerySpacyFoodAppClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VerySpacyFoodAppClip.entitlements; sourceTree = "<group>"; };
 		85CB1BB7BBCB07E2AA5EB2B1 /* Pods-Very Spacy FoodTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Very Spacy FoodTests.release.xcconfig"; path = "Target Support Files/Pods-Very Spacy FoodTests/Pods-Very Spacy FoodTests.release.xcconfig"; sourceTree = "<group>"; };
 		9DA6F608D3217745D7C2E73C /* Pods-Very Spacy Food.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Very Spacy Food.release.xcconfig"; path = "Target Support Files/Pods-Very Spacy Food/Pods-Very Spacy Food.release.xcconfig"; sourceTree = "<group>"; };
 		AB2BB1CD6FB846698B3FE355 /* Pods-Spacy Food.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spacy Food.release.xcconfig"; path = "Target Support Files/Pods-Spacy Food/Pods-Spacy Food.release.xcconfig"; sourceTree = "<group>"; };
@@ -99,6 +134,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		445C124026F4762200D6F3DD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -108,6 +150,7 @@
 				3213002724193DB50062FEF0 /* Very Spacy Food */,
 				3213003E24193DB70062FEF0 /* Spacy FoodTests */,
 				3258CB7E24D2DAB200C0CC8D /* Very Very Spacy FoodUITests */,
+				445C124426F4762200D6F3DD /* VerySpacyFoodAppClip */,
 				3213002624193DB50062FEF0 /* Products */,
 				E8CFFFBA74994B280D860A4A /* Pods */,
 				C547A935D223323B9EEA2770 /* Frameworks */,
@@ -120,6 +163,7 @@
 				3213002524193DB50062FEF0 /* Very Very Spacy Food.app */,
 				3213003B24193DB70062FEF0 /* Very Spacy FoodTests.xctest */,
 				3258CB7D24D2DAB200C0CC8D /* Very Very Spacy FoodUITests.xctest */,
+				445C124326F4762200D6F3DD /* VerySpacyFoodAppClip.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,6 +215,20 @@
 			path = "Very Very Spacy FoodUITests";
 			sourceTree = "<group>";
 		};
+		445C124426F4762200D6F3DD /* VerySpacyFoodAppClip */ = {
+			isa = PBXGroup;
+			children = (
+				445C124526F4762200D6F3DD /* AppDelegate.swift */,
+				445C124926F4762200D6F3DD /* ViewController.swift */,
+				445C124B26F4762200D6F3DD /* Main.storyboard */,
+				445C124E26F4762400D6F3DD /* Assets.xcassets */,
+				445C125026F4762400D6F3DD /* LaunchScreen.storyboard */,
+				445C125326F4762400D6F3DD /* Info.plist */,
+				445C125426F4762400D6F3DD /* VerySpacyFoodAppClip.entitlements */,
+			);
+			path = VerySpacyFoodAppClip;
+			sourceTree = "<group>";
+		};
 		C547A935D223323B9EEA2770 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,10 +263,12 @@
 				3213002224193DB50062FEF0 /* Frameworks */,
 				3213002324193DB50062FEF0 /* Resources */,
 				857539B5D8FF3AA9E105C874 /* [CP] Embed Pods Frameworks */,
+				445C125826F4762400D6F3DD /* Embed App Clips */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				445C125626F4762400D6F3DD /* PBXTargetDependency */,
 			);
 			name = "Very Spacy Food";
 			productName = "Spacy Food";
@@ -252,13 +312,30 @@
 			productReference = 3258CB7D24D2DAB200C0CC8D /* Very Very Spacy FoodUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		445C124226F4762200D6F3DD /* VerySpacyFoodAppClip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 445C125B26F4762400D6F3DD /* Build configuration list for PBXNativeTarget "VerySpacyFoodAppClip" */;
+			buildPhases = (
+				445C123F26F4762200D6F3DD /* Sources */,
+				445C124026F4762200D6F3DD /* Frameworks */,
+				445C124126F4762200D6F3DD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VerySpacyFoodAppClip;
+			productName = VerySpacyFoodAppClip;
+			productReference = 445C124326F4762200D6F3DD /* VerySpacyFoodAppClip.app */;
+			productType = "com.apple.product-type.application.on-demand-install-capable";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		3213001D24193DB50062FEF0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1150;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Very Good Security";
 				TargetAttributes = {
@@ -272,6 +349,9 @@
 					3258CB7C24D2DAB200C0CC8D = {
 						CreatedOnToolsVersion = 11.5;
 						TestTargetID = 3213002424193DB50062FEF0;
+					};
+					445C124226F4762200D6F3DD = {
+						CreatedOnToolsVersion = 12.5.1;
 					};
 				};
 			};
@@ -291,6 +371,7 @@
 				3213002424193DB50062FEF0 /* Very Spacy Food */,
 				3213003A24193DB70062FEF0 /* Very Spacy FoodTests */,
 				3258CB7C24D2DAB200C0CC8D /* Very Very Spacy FoodUITests */,
+				445C124226F4762200D6F3DD /* VerySpacyFoodAppClip */,
 			);
 		};
 /* End PBXProject section */
@@ -318,6 +399,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		445C124126F4762200D6F3DD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				445C125226F4762400D6F3DD /* LaunchScreen.storyboard in Resources */,
+				445C124F26F4762400D6F3DD /* Assets.xcassets in Resources */,
+				445C124D26F4762200D6F3DD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +511,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		445C123F26F4762200D6F3DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				445C124A26F4762200D6F3DD /* ViewController.swift in Sources */,
+				445C124626F4762200D6F3DD /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -432,6 +532,11 @@
 			isa = PBXTargetDependency;
 			target = 3213002424193DB50062FEF0 /* Very Spacy Food */;
 			targetProxy = 3258CB8224D2DAB200C0CC8D /* PBXContainerItemProxy */;
+		};
+		445C125626F4762400D6F3DD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 445C124226F4762200D6F3DD /* VerySpacyFoodAppClip */;
+			targetProxy = 445C125526F4762400D6F3DD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -448,6 +553,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				3213003424193DB70062FEF0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		445C124B26F4762200D6F3DD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				445C124C26F4762200D6F3DD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		445C125026F4762400D6F3DD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				445C125126F4762400D6F3DD /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -573,6 +694,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C4ED15166E44F028784DBDD1 /* Pods-Very Spacy Food.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -596,6 +718,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9DA6F608D3217745D7C2E73C /* Pods-Very Spacy Food.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -701,6 +824,52 @@
 			};
 			name = Release;
 		};
+		445C125926F4762400D6F3DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = VerySpacyFoodAppClip/VerySpacyFoodAppClip.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4445Y664U5;
+				INFOPLIST_FILE = VerySpacyFoodAppClip/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vgs.very-spacy-food.Clip";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		445C125A26F4762400D6F3DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = VerySpacyFoodAppClip/VerySpacyFoodAppClip.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4445Y664U5;
+				INFOPLIST_FILE = VerySpacyFoodAppClip/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vgs.very-spacy-food.Clip";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -736,6 +905,15 @@
 			buildConfigurations = (
 				3258CB8524D2DAB200C0CC8D /* Debug */,
 				3258CB8624D2DAB200C0CC8D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		445C125B26F4762400D6F3DD /* Build configuration list for PBXNativeTarget "VerySpacyFoodAppClip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				445C125926F4762400D6F3DD /* Debug */,
+				445C125A26F4762400D6F3DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
