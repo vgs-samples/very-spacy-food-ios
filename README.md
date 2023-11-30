@@ -2,7 +2,7 @@
 # Very Spacy Food <br/> VGS Collect iOS SDK Showcase Application 
 
 
-Very Spacy Food is a food ordering demo application build with [VGSCollectSDK](https://github.com/verygoodsecurity/vgs-collect-ios) for secure collecting credit cards data.
+Very Spacy Food is a food ordering demo application build with [VGSCollectSDK](https://github.com/verygoodsecurity/vgs-collect-ios) for securely collecting credit card data.
 
 <p align="center">
 <img src="app_order_screen.png" width="200">    <img src="app_collect_card_data_screen.png" width="200">    <img src="app_confirmation_screen.png" width="200">
@@ -18,14 +18,14 @@ Very Spacy Food is a food ordering demo application build with [VGSCollectSDK](h
 
 #### Step 1
 
-Go to your <a href="https://dashboard.verygoodsecurity.com/" target="_blank">VGS organization</a> and establish <a href="https://www.verygoodsecurity.com/docs/getting-started/quick-integration#securing-inbound-connection" target="_blank">Inbound connection</a>. For this demo you can import pre-built Routs configuration:
+Go to your <a href="https://dashboard.verygoodsecurity.com/" target="_blank">VGS organization</a> and establish <a href="https://www.verygoodsecurity.com/docs/getting-started/quick-integration#securing-inbound-connection" target="_blank">Inbound connection</a>. For this demo you can import a pre-built Routes configuration:
 
 <p align="center">
 <img src="dashboard_routs.png" width="600">
 </p>
 
 -  Inside the app repository find **configuration.yaml** file and download it.
--  On the <a href="https://dashboard.verygoodsecurity.com/" target="_blank">Dashboard</a> screen go to the **Routs** section and selet **Inbound** Tab. 
+-  On the <a href="https://dashboard.verygoodsecurity.com/" target="_blank">Dashboard</a> screen go to the **Routes** section and selet **Inbound** Tab. 
 -  At the right corner you will see **Manage** button. Press it and select **Import YAML file**, then choose **configuration.yaml** that you just download and **Save** the Rout.
 -  Now the cards data you send by VGSCollectSDK will be secured.
 
@@ -91,19 +91,19 @@ or
 123
 
 ```
-Press **Save** button. Then data will be submitted to VGS.  
+Press the **Save** button and the data will be submitted to VGS.  
 Go to the Logs tab on <a href="http://dashboard.verygoodsecurity.com" target="_blank">Dashboard</a>, find request and secure a payload.  
 Instruction for this step you can find <a href="https://www.verygoodsecurity.com/docs/getting-started/quick-integration#securing-inbound-connection" target="_blank">here</a>.
 
 ### Step 6
 
-Check examples how to integrate **VGSCollectSDK** into your app.
+Check examples for how to integrate **VGSCollectSDK** into your app.
 
 `CollectCreditCardDataViewController.swift`is build with VGSCollect Forms. You can check how to customise SDK UI elemetnts, observe field states(validation, card bin & last 4 numbers, card brand, etc), submit data to VGS. After you **submit** card data, VGS will return **alias** for each secured filed instead of raw data. Then you can use **alias** to store on your backend or make payments later.
 
 `CheckoutViewController.swift` use not sensitive card data as card brand, card number bin and last 4 numbers to provide user info about his payment data. On **Pay** action app will send **alias** data to our test backend. For demo purpose backend actually do nothing but send "Success" in response if you reach it. 
 
-Note that usually you shouldn't make payment request to payment provider directly from your production app. For sequrity reasons payment requests should be done from your backend. On payment request **alias** will go through **VGS forward proxy**. More information how to setup **Outbound** request from your backend is described <a href="https://www.verygoodsecurity.com/docs/guides/outbound-connection" target="_blank"> here</a> 
+Note that usually you shouldn't make a payment request to payment providers directly from your production app. For security reasons payment requests should be done from your backend. On payment request **alias** will go through **VGS forward proxy**. More information how to setup **Outbound** request from your backend is described <a href="https://www.verygoodsecurity.com/docs/guides/outbound-connection" target="_blank"> here</a> 
 
 ### Useful links
 
