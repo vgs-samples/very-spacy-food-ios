@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import VGSCollectSDK
+import VGSCardIOCollector
 
 /// An object that store secured card data details
 struct SecuredCardData {
@@ -49,7 +50,8 @@ class CollectCreditCardDataViewController: UIViewController {
     var cardNumber = VGSCardTextField()
     var cardExpDate = VGSExpDateTextField()
     var cardCVCNumber = VGSTextField()
-    var scanController: VGSCardScanController?
+    // Init CardIO Scan controller
+    var scanController = VGSCardIOScanController()
     
     // Helpers
     var isKeyboardVisible = false
@@ -73,6 +75,8 @@ class CollectCreditCardDataViewController: UIViewController {
         addGestureRecognizer()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         cardFieldsContainerView.addGradient(UIColor.lightBlueColorsSet)
+      
+        scanController.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -199,8 +203,7 @@ class CollectCreditCardDataViewController: UIViewController {
     //MARK: - Card Scan
     @objc func scan() {
         /// Init and present card.io scanner. If scanned data is valid it will be set automatically  into VGSTextFields, you should implement VGSCardIOScanControllerDelegate for this.
-        scanController = VGSCardScanController(apiKey: "YOUR_API_KET", delegate: self)
-        scanController?.presentCardScanner(on: self, animated: true, completion: nil)
+        scanController.presentCardScanner(on: self, animated: true, completion: nil)
     }
     
     //MARK: - Send Data
@@ -218,7 +221,7 @@ class CollectCreditCardDataViewController: UIViewController {
         }
         
         /// Also you can grab not sensetive data form CardState attribures
-        let cardState = cardNumber.state as? CardState
+        let cardState = cardNumber.state as? VGSCardState
         let bin = cardState?.bin ?? ""
         let last4 = cardState?.last4 ?? ""
         let brand = cardState?.cardBrand.stringValue ?? ""
@@ -292,17 +295,17 @@ extension CollectCreditCardDataViewController: VGSTextFieldDelegate {
 
 // MARK: - VGSCardIOScanControllerDelegate
 /// Handle Card Scanning Delegate
-extension CollectCreditCardDataViewController: VGSCardScanControllerDelegate {
+extension CollectCreditCardDataViewController: VGSCardIOScanControllerDelegate {
     
     /// Set in which VGSTextField scanned data with type should be set. Called after user select Done button, just before userDidFinishScan() delegate.
-    func textFieldForScannedData(type: CradScanDataType) -> VGSTextField? {
+    func textFieldForScannedData(type: CradIODataType) -> VGSTextField? {
         switch type {
         case .cardNumber:
             return cardNumber
         case .expirationDate:
             return cardExpDate
-        case .name:
-            return cardHolderName
+        case .cvc:
+          return cardCVCNumber
         default:
             return nil
         }
@@ -310,12 +313,12 @@ extension CollectCreditCardDataViewController: VGSCardScanControllerDelegate {
     
     /// Handle  Cancel button action on Card.io screen
     func userDidCancelScan() {
-        scanController?.dismissCardScanner(animated: true, completion: nil)
+        scanController.dismissCardScanner(animated: true, completion: nil)
     }
     
     /// Handle  Done button action on Card.io screen
     func userDidFinishScan() {
-      scanController?.dismissCardScanner(animated: true, completion: { [weak self] in
+      scanController.dismissCardScanner(animated: true, completion: { [weak self] in
         self?.cardCVCNumber.becomeFirstResponder()
       })
     }
